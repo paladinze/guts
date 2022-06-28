@@ -1,7 +1,7 @@
 
 # Guts
 
-A Nx-based monorepo that contains some important stuff (most likely just for learning purpose, not for production use).
+A Nx-based monorepo that contains some important stuff (most likely just for learning purpose).
 
 ## Project structure
 
@@ -26,5 +26,5 @@ npm i -g nx
 
 ### build and run projects
 
-- the common syntax for build, run and other tasks is: `nx run [project-name]:[target]
+- the common syntax for build, run and other tasks is: `nx run [project-name]`:[target]
 - a list of available projects can be found in `workspace.json`
