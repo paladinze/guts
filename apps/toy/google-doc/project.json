@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/toy/google-doc/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/toy/google-doc",
+        "index": "apps/toy/google-doc/src/index.html",
+        "baseHref": "/",
+        "main": "apps/toy/google-doc/src/main.tsx",
+        "polyfills": "apps/toy/google-doc/src/polyfills.ts",
+        "tsConfig": "apps/toy/google-doc/tsconfig.app.json",
+        "assets": [
+          "apps/toy/google-doc/src/favicon.ico",
+          "apps/toy/google-doc/src/assets"
+        ],
+        "styles": ["apps/toy/google-doc/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/toy/google-doc/src/environments/environment.ts",
+              "with": "apps/toy/google-doc/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "toy-google-doc:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "toy-google-doc:build:development"
+        },
+        "production": {
+          "buildTarget": "toy-google-doc:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/toy/google-doc/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/toy/google-doc"],
+      "options": {
+        "jestConfig": "apps/toy/google-doc/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

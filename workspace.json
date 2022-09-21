@@ -2,6 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "toy-mini-webpack": "libs/toy/mini-webpack"
+    "toy-block-editor": "apps/toy/block-editor",
+    "toy-google-doc": "apps/toy/google-doc",
+    "toy-mini-webpack": "libs/toy/mini-webpack",
+    "toy-websocket-server": "apps/toy/websocket-server"
   }
 }

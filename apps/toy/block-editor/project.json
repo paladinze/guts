@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/toy/block-editor/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/toy/block-editor",
+        "index": "apps/toy/block-editor/src/index.html",
+        "baseHref": "/",
+        "main": "apps/toy/block-editor/src/main.tsx",
+        "polyfills": "apps/toy/block-editor/src/polyfills.ts",
+        "tsConfig": "apps/toy/block-editor/tsconfig.app.json",
+        "assets": [
+          "apps/toy/block-editor/src/favicon.ico",
+          "apps/toy/block-editor/src/assets"
+        ],
+        "styles": ["apps/toy/block-editor/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/toy/block-editor/src/environments/environment.ts",
+              "with": "apps/toy/block-editor/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "toy-block-editor:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "toy-block-editor:build:development"
+        },
+        "production": {
+          "buildTarget": "toy-block-editor:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/toy/block-editor/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/toy/block-editor"],
+      "options": {
+        "jestConfig": "apps/toy/block-editor/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

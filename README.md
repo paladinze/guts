@@ -6,9 +6,13 @@ A Nx-based monorepo that contains some important stuff (most likely just for lea
 ## Project structure
 
 ```
+apps
+└── toy # toy implementation of interesting concepts
+    └── google-doc-clone
 libs
 └── toy # toy implementation of interesting concepts
     └── mini-webpack
+    
 
 ```
 
@@ -28,3 +32,20 @@ npm i -g nx
 
 - the common syntax for build, run and other tasks is: `nx run [project-name]`:[target]
 - a list of available projects can be found in `workspace.json`
+
+## Scaffolding
+
+### 创建应用（app）
+
+**Create new React App** [More Options](https://nx.dev/packages/react/generators/application#nrwlreactapplication)
+
+```bash
+nx g @nrwl/react:app --name=[project_name] --directory=[sub directory in apps directory]
+```
+
+- build：Webpack + Babel
+- lang：TypeScript
+- framework：React
+- Style：CSS Module
+- Unit tests：Jest
+- E2E tests：Cypress
