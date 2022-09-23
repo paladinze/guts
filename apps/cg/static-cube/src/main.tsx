@@ -1,5 +1,5 @@
 import {
-  AxesHelper, BufferAttribute, BufferGeometry,
+  AxesHelper, BufferAttribute, BufferGeometry, DoubleSide,
   GridHelper,
   Mesh,
   MeshBasicMaterial,
@@ -8,17 +8,28 @@ import {
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import GUI from 'lil-gui';
+import gsap from 'gsap';
+
+const debugParams = {
+  triangleCount: 50,
+  color: 0xff0000,
+  spin() {
+    gsap.to(triangle.rotation, { duration: 1, y: triangle.rotation.y + Math.PI * 2 })
+  }
+}
 
 const canvas = document.getElementById('webgl')!;
 const renderer = new WebGLRenderer({ canvas, antialias: true });
 
 const scene = new Scene();
 
-// create cube
+// create cube using random triangles
 const mat = new MeshBasicMaterial({
   wireframe: false,
-  color: 'red'
+  color: debugParams.color
 });
+mat.side = DoubleSide;
 const geo = createCustomGeometry();
 const triangle = new Mesh(geo, mat);
 scene.add(triangle);
@@ -83,6 +94,32 @@ window.addEventListener('dblclick', () => {
   else if (element.webkitEnterFullscreen) element.webkitEnterFullscreen(); // Magic is here for iOS
 });
 
+// create debug GUI
+const gui = new GUI({
+  width: 350,
+});
+gui
+  .add(triangle.position, 'y')
+  .min(- 3)
+  .max(3)
+  .step(0.01)
+  .name('elevation')
+gui.add(triangle, 'visible')
+gui.add(mat, 'wireframe')
+gui
+  .addColor(debugParams, 'color')
+  .onChange(() => {
+    mat.color.set(debugParams.color)
+  })
+gui.add(debugParams, 'spin');
+gui.add(debugParams, 'triangleCount')
+  .min(0)
+  .max(5000)
+  .step(1)
+  .onChange((val: number) => {
+    geo.setDrawRange(0, val * 3);
+  });
+
 // start animation loop
 renderer.setAnimationLoop((currTime) => {
   controls.update();
@@ -99,7 +136,7 @@ function createCustomGeometry() {
   const geometry = new BufferGeometry();
   const vertices = new Float32Array(totalComponents);
   for (let i = 0; i < totalComponents; i++) {
-    vertices[i] = Math.random() * 2 - 0.5;
+    vertices[i] = Math.random() * 2;
   }
   geometry.setAttribute('position', new BufferAttribute(vertices, componentsPerVertex));
 
