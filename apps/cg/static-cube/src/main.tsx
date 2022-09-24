@@ -5,9 +5,9 @@ import {
   DoubleSide,
   GridHelper,
   Mesh,
-  MeshBasicMaterial,
+  MeshBasicMaterial, MeshMatcapMaterial,
   PerspectiveCamera,
-  Scene,
+  Scene, TextureLoader,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -28,6 +28,7 @@ async function main() {
 
   // loaders
   const fontLoader = new FontLoader();
+  const textureLoader = new TextureLoader();
 
   // get Canvas and create scene
   const canvas = document.getElementById('webgl')!;
@@ -36,7 +37,7 @@ async function main() {
   const scene = new Scene();
 
   // create font
-  const textMesh = await createTextMesh(fontLoader);
+  const textMesh = await createTextMesh(fontLoader, textureLoader);
   textMesh.position.y = 3;
   scene.add(textMesh);
 
@@ -145,7 +146,7 @@ function loadFont(loader: FontLoader, url: string) {
   return loader.loadAsync(url);
 }
 
-async function createTextMesh(fontLoader: FontLoader) {
+async function createTextMesh(fontLoader: FontLoader, textureLoader: TextureLoader) {
   const font = await loadFont(fontLoader, 'assets/fonts/kuaile_regular.typeface.json');
   const textGeometry = new TextGeometry(
     'A Random Cube',
@@ -161,18 +162,23 @@ async function createTextMesh(fontLoader: FontLoader) {
       bevelSegments: 3
     }
   );
-  const textMaterial = new MeshBasicMaterial({
-    color: '0xDDDDDD',
-    wireframe: true
+  // const textMaterial = new MeshBasicMaterial({
+  //   color: '0xDDDDDD',
+  //   wireframe: true
+  // });
+
+  const texture = await textureLoader.loadAsync('assets/textures/matcap_05.png');
+  const textMaterial = new MeshMatcapMaterial({
+    matcap: texture
   });
 
   // center the text geometry inside the mesh
   // textGeometry.center();
   textGeometry.computeBoundingBox();
   textGeometry.translate(
-    - textGeometry.boundingBox!.max.x * 0.5,
-    - textGeometry.boundingBox!.max.y * 0.5,
-    - textGeometry.boundingBox!.max.z * 0.5
+    -textGeometry.boundingBox!.max.x * 0.5,
+    -textGeometry.boundingBox!.max.y * 0.5,
+    -textGeometry.boundingBox!.max.z * 0.5
   );
   return new Mesh(textGeometry, textMaterial);
 }
