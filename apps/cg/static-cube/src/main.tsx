@@ -1,13 +1,14 @@
 import {
-  AxesHelper,
+  AmbientLight,
+  AxesHelper, BoxGeometry,
   BufferAttribute,
-  BufferGeometry,
+  BufferGeometry, Color, DirectionalLight,
   DoubleSide,
   GridHelper,
   Mesh,
-  MeshBasicMaterial, MeshMatcapMaterial,
+  MeshBasicMaterial, MeshMatcapMaterial, MeshStandardMaterial,
   PerspectiveCamera,
-  Scene, TextureLoader,
+  Scene, SpotLight, SpotLightHelper, TextureLoader,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -36,13 +37,38 @@ async function main() {
 
   const scene = new Scene();
 
+  // create ambient light
+  const ambientLight = new AmbientLight();
+  ambientLight.color = new Color(0xffffff);
+  ambientLight.intensity = 0.1;
+  scene.add(ambientLight);
+
+  // create directional light
+  const directionalLight = new DirectionalLight(0xff0000, 0.5);
+  directionalLight.position.set(3, 5, 2);
+  // scene.add(directionalLight);
+
+  // create spot light
+  const spotLight = new SpotLight(0xff0000, 3.0, 8, Math.PI * 0.1, 0.25, 1);
+  spotLight.position.set(3, 5, 3);
+  scene.add(spotLight);
+  spotLight.target.position.set(0, 0, 0);
+  scene.add(spotLight.target);
+  const spotLightHelper = new SpotLightHelper(spotLight, 'red');
+  scene.add(spotLightHelper);
+
+
   // create font
   const textMesh = await createTextMesh(fontLoader, textureLoader);
   textMesh.position.y = 3;
   scene.add(textMesh);
 
   // create cube using random triangles
-  const { cubeMesh, cubeMat, cubeGeo } = createCubeMesh(debugParams);
+  // const { cubeMesh, cubeMat, cubeGeo } = createCubeMesh(debugParams);
+  // scene.add(cubeMesh);
+
+  // create cube using PBR material
+  const { cubeMesh, cubeMat, cubeGeo } = createPbrCubeMesh();
   scene.add(cubeMesh);
 
   // create camera
@@ -190,10 +216,25 @@ async function createTextMesh(fontLoader: FontLoader, textureLoader: TextureLoad
 function createCubeMesh(debugParams: any) {
   const mat = new MeshBasicMaterial({
     wireframe: false,
+    side: DoubleSide,
     color: debugParams.color
   });
-  mat.side = DoubleSide;
   const geo = createCustomGeometry(debugParams);
+  return {
+    cubeMesh: new Mesh(geo, mat),
+    cubeMat: mat,
+    cubeGeo: geo
+  };
+}
+
+
+function createPbrCubeMesh() {
+  const mat = new MeshStandardMaterial({
+    wireframe: false,
+    roughness: 0.4,
+    side: DoubleSide
+  });
+  const geo = new BoxGeometry(2, 2, 2);
   return {
     cubeMesh: new Mesh(geo, mat),
     cubeMat: mat,
