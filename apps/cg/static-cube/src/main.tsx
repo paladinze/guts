@@ -1,14 +1,23 @@
 import {
   AmbientLight,
-  AxesHelper, BoxGeometry,
+  AxesHelper,
+  BoxGeometry,
   BufferAttribute,
-  BufferGeometry, Color, DirectionalLight,
+  BufferGeometry,
+  Color,
+  DirectionalLight,
   DoubleSide,
   GridHelper,
   Mesh,
-  MeshBasicMaterial, MeshMatcapMaterial, MeshStandardMaterial,
+  MeshBasicMaterial,
+  MeshMatcapMaterial,
+  MeshStandardMaterial,
+  PCFSoftShadowMap,
   PerspectiveCamera,
-  Scene, SpotLight, SpotLightHelper, TextureLoader,
+  Scene,
+  SpotLight,
+  SpotLightHelper,
+  TextureLoader,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -34,6 +43,9 @@ async function main() {
   // get Canvas and create scene
   const canvas = document.getElementById('webgl')!;
   const renderer = new WebGLRenderer({ canvas, antialias: true });
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = PCFSoftShadowMap;
+
 
   const scene = new Scene();
 
@@ -49,8 +61,12 @@ async function main() {
   // scene.add(directionalLight);
 
   // create spot light
-  const spotLight = new SpotLight(0xff0000, 3.0, 8, Math.PI * 0.1, 0.25, 1);
-  spotLight.position.set(3, 5, 3);
+  const spotLight = new SpotLight(0xff0000, 2.0, 10, Math.PI * 0.2, 0.25, 1);
+  spotLight.position.set(2, 5, 2);
+  spotLight.castShadow = true;
+  spotLight.shadow.mapSize.height = 2048;
+  spotLight.shadow.mapSize.width = 2048;
+  // spotLight.shadow.radius = 3;
   scene.add(spotLight);
   spotLight.target.position.set(0, 0, 0);
   scene.add(spotLight.target);
@@ -60,7 +76,7 @@ async function main() {
 
   // create font
   const textMesh = await createTextMesh(fontLoader, textureLoader);
-  textMesh.position.y = 3;
+  textMesh.position.y = 3.3;
   scene.add(textMesh);
 
   // create cube using random triangles
@@ -69,7 +85,15 @@ async function main() {
 
   // create cube using PBR material
   const { cubeMesh, cubeMat, cubeGeo } = createPbrCubeMesh();
+  cubeMesh.position.y = 1;
+  cubeMesh.castShadow = true;
   scene.add(cubeMesh);
+
+  // create ground
+  const ground = createGround();
+  ground.position.y = -0.01;
+  ground.receiveShadow = true;
+  scene.add(ground);
 
   // create camera
   const cam = new PerspectiveCamera(75, 4 / 3, 0.1, 1000);
@@ -88,6 +112,7 @@ async function main() {
   scene.add(gridHelper);
 
   const axesHelper = new AxesHelper(5);
+  axesHelper.position.y = 0.05  ;
   scene.add(axesHelper);
 
 // camera controls
@@ -225,6 +250,12 @@ function createCubeMesh(debugParams: any) {
     cubeMat: mat,
     cubeGeo: geo
   };
+}
+
+function createGround() {
+  const mat = new MeshStandardMaterial();
+  const geo = new BoxGeometry(20, 0.1, 20);
+  return new Mesh(geo, mat);
 }
 
 
