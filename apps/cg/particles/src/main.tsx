@@ -2,7 +2,8 @@ import {
   AdditiveBlending,
   AxesHelper,
   BufferAttribute,
-  BufferGeometry, Clock,
+  BufferGeometry,
+  Clock,
   Fog,
   GridHelper,
   Mesh,
@@ -24,7 +25,8 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 async function main() {
   const debugParams = {
-    pointCount: 500
+    pointCount: 500,
+    waveAnimation: false,
   };
 
   // loaders
@@ -137,13 +139,25 @@ async function main() {
     .onChange((val: number) => {
       geo.setDrawRange(0, val);
     });
+  gui.add(debugParams, 'waveAnimation');
 
   // start animation loop
-  const clock = new Clock()
+  const clock = new Clock();
   renderer.setAnimationLoop(() => {
     controls.update();
 
-    points.rotation.y = clock.getElapsedTime() * 0.1;
+    // sine wave animation
+    if (debugParams.waveAnimation) {
+      const { pointCount } = debugParams;
+      const posAttrib = geo.attributes['position'];
+      for (let i = 0; i < pointCount; i++) {
+        const x = posAttrib.getX(i);
+        posAttrib.setY(i, Math.sin(x + clock.getElapsedTime()));
+      }
+      posAttrib.needsUpdate = true;
+    } else {
+      points.rotation.y  = Math.sin(clock.getElapsedTime() * 0.1);
+    }
 
     renderer.render(scene, cam);
   });
