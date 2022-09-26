@@ -8,7 +8,13 @@ A Nx-based monorepo that contains some important stuff (most likely just for lea
 ```
 apps
 └── toy # toy implementation of interesting concepts
-    └── google-doc-clone
+    └── google-doc
+    └── block-editor
+    └── websocket-server
+└── cg # computer graphics demo (mostly based on WebGL & Three.js)
+    └── particles
+    └── raycast
+    └── static-cube
 libs
 └── toy # toy implementation of interesting concepts
     └── mini-webpack
@@ -35,7 +41,7 @@ npm i -g nx
 
 ## Scaffolding
 
-### 创建应用（app）
+### creating apps
 
 **Create new React App** [More Options](https://nx.dev/packages/react/generators/application#nrwlreactapplication)
 
@@ -44,7 +50,7 @@ nx g @nrwl/react:app --name=[project_name] --directory=[sub directory in apps di
 ```
 
 - build：Webpack + Babel
-- lang：TypeScript
+- language：TypeScript
 - framework：React
 - Style：CSS Module
 - Unit tests：Jest
