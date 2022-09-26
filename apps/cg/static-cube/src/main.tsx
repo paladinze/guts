@@ -7,6 +7,7 @@ import {
   Color,
   DirectionalLight,
   DoubleSide,
+  Fog,
   GridHelper,
   Mesh,
   MeshBasicMaterial,
@@ -103,6 +104,11 @@ async function main() {
   cam.lookAt(0, 0, 0);
   scene.add(cam);
 
+  // create fog
+  const fogColor = '#222222';
+  scene.fog = new Fog(fogColor, 1, 15);
+  // set clear color to match fog color
+  renderer.setClearColor(fogColor);
 
   // create helpers
   const size = 10;
