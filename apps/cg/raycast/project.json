@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cg/raycast/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cg/raycast",
+        "index": "apps/cg/raycast/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cg/raycast/src/main.tsx",
+        "polyfills": "apps/cg/raycast/src/polyfills.ts",
+        "tsConfig": "apps/cg/raycast/tsconfig.app.json",
+        "assets": [
+          "apps/cg/raycast/src/favicon.ico",
+          "apps/cg/raycast/src/assets"
+        ],
+        "styles": ["apps/cg/raycast/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cg/raycast/src/environments/environment.ts",
+              "with": "apps/cg/raycast/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cg-raycast:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cg-raycast:build:development"
+        },
+        "production": {
+          "buildTarget": "cg-raycast:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cg/raycast/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cg/raycast"],
+      "options": {
+        "jestConfig": "apps/cg/raycast/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
