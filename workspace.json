@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "cg-particles": "apps/cg/particles",
+    "cg-raycast": "apps/cg/raycast",
     "cg-static-cube": "apps/cg/static-cube",
     "toy-block-editor": "apps/toy/block-editor",
     "toy-google-doc": "apps/toy/google-doc",
