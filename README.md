@@ -15,6 +15,9 @@ apps
     └── particles
     └── raycast
     └── static-cube
+└── cloud # cloud computing
+    └── otel-client: frontend with OpenTelemetry tracing
+    └── otel-servers: backend with OpenTelemetry tracing
 libs
 └── toy # toy implementation of interesting concepts
     └── mini-webpack

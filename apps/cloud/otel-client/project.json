@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cloud/otel-client/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cloud/otel-client",
+        "index": "apps/cloud/otel-client/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cloud/otel-client/src/main.tsx",
+        "polyfills": "apps/cloud/otel-client/src/polyfills.ts",
+        "tsConfig": "apps/cloud/otel-client/tsconfig.app.json",
+        "assets": [
+          "apps/cloud/otel-client/src/favicon.ico",
+          "apps/cloud/otel-client/src/assets"
+        ],
+        "styles": ["apps/cloud/otel-client/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cloud/otel-client/src/environments/environment.ts",
+              "with": "apps/cloud/otel-client/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cloud-otel-client:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cloud-otel-client:build:development"
+        },
+        "production": {
+          "buildTarget": "cloud-otel-client:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cloud/otel-client/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cloud/otel-client"],
+      "options": {
+        "jestConfig": "apps/cloud/otel-client/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

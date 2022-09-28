@@ -5,6 +5,7 @@
     "cg-particles": "apps/cg/particles",
     "cg-raycast": "apps/cg/raycast",
     "cg-static-cube": "apps/cg/static-cube",
+    "cloud-otel-client": "apps/cloud/otel-client",
     "toy-block-editor": "apps/toy/block-editor",
     "toy-google-doc": "apps/toy/google-doc",
     "toy-mini-webpack": "libs/toy/mini-webpack",
