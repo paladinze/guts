@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cg/scroll-animation/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cg/scroll-animation",
+        "index": "apps/cg/scroll-animation/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cg/scroll-animation/src/main.tsx",
+        "polyfills": "apps/cg/scroll-animation/src/polyfills.ts",
+        "tsConfig": "apps/cg/scroll-animation/tsconfig.app.json",
+        "assets": [
+          "apps/cg/scroll-animation/src/favicon.ico",
+          "apps/cg/scroll-animation/src/assets"
+        ],
+        "styles": ["apps/cg/scroll-animation/src/style.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cg/scroll-animation/src/environments/environment.ts",
+              "with": "apps/cg/scroll-animation/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cg-scroll-animation:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cg-scroll-animation:build:development"
+        },
+        "production": {
+          "buildTarget": "cg-scroll-animation:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cg/scroll-animation/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cg/scroll-animation"],
+      "options": {
+        "jestConfig": "apps/cg/scroll-animation/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -4,6 +4,7 @@
   "projects": {
     "cg-particles": "apps/cg/particles",
     "cg-raycast": "apps/cg/raycast",
+    "cg-scroll-animation": "apps/cg/scroll-animation",
     "cg-static-cube": "apps/cg/static-cube",
     "cloud-otel-client": "apps/cloud/otel-client",
     "toy-block-editor": "apps/toy/block-editor",
