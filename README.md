@@ -58,3 +58,14 @@ nx g @nrwl/react:app --name=[project_name] --directory=[sub directory in apps di
 - Style：CSS Module
 - Unit tests：Jest
 - E2E tests：Cypress
+
+**Create Express App** [More Options](https://nx.dev/packages/express/generators/application)
+
+```bash
+nx g @nrwl/express:application --name=[project_name] --directory=[sub directory in apps directory]
+```
+
+- build：Webpack + Babel
+- language：TypeScript
+- framework：Express
+
