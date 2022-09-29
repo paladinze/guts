@@ -33,9 +33,19 @@ async function main() {
   const world = new CANNON.World();
   world.gravity.set(0, -9.82, 0);
 
+  // physics material
+  const glassMat = new CANNON.Material('glass')
+  const plasticMat = new CANNON.Material('plastic')
+  const contactMat = new CANNON.ContactMaterial(glassMat, plasticMat, {
+    friction: 0.01,
+    restitution: 0.2
+  });
+  world.addContactMaterial(contactMat);
+
   // static floor
   const floorBody = new CANNON.Body();
   floorBody.addShape(new CANNON.Plane());
+  floorBody.material = glassMat;
   floorBody.mass = 0; // static
   floorBody.quaternion.setFromAxisAngle(
     new CANNON.Vec3(-1, 0, 0),
@@ -70,7 +80,7 @@ async function main() {
   cubeMesh.castShadow = true;
   scene.add(cubeMesh);
 
-  // rigid body
+  // rigid body for the cube
   const boxShape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
   const boxBody = new CANNON.Body({
     mass: 1,
@@ -80,6 +90,7 @@ async function main() {
       cubeMesh.position.z),
     shape: boxShape
   });
+  boxBody.material = plasticMat;
   world.addBody(boxBody);
 
   // create camera
