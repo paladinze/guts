@@ -11,6 +11,7 @@ import {
   MeshMatcapMaterial,
   PerspectiveCamera,
   Scene,
+  SphereGeometry,
   TextureLoader,
   Vector3,
   WebGLRenderer
@@ -19,10 +20,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import * as CANNON from 'cannon-es';
+import GUI from 'lil-gui';
 
 const debugParams = {
-  triangleCount: 300,
-  color: 0xff0000
+  left2RightWind: true,
+  right2LeftWind: true,
 };
 
 
@@ -34,10 +36,10 @@ async function main() {
   world.gravity.set(0, -9.82, 0);
 
   // physics material
-  const glassMat = new CANNON.Material('glass')
-  const plasticMat = new CANNON.Material('plastic')
+  const glassMat = new CANNON.Material('glass');
+  const plasticMat = new CANNON.Material('plastic');
   const contactMat = new CANNON.ContactMaterial(glassMat, plasticMat, {
-    friction: 0.01,
+    friction: 0.7 ,
     restitution: 0.2
   });
   world.addContactMaterial(contactMat);
@@ -68,30 +70,32 @@ async function main() {
   ambientLight.intensity = 0.1;
   scene.add(ambientLight);
 
-
   // create font
   const textMesh = await createTextMesh(fontLoader, textureLoader);
   textMesh.position.y = 7;
   scene.add(textMesh);
 
-  // create cube using PBR material
-  const { cubeMesh, cubeMat, cubeGeo } = createCubeMesh();
-  cubeMesh.position.y = 5;
-  cubeMesh.castShadow = true;
-  scene.add(cubeMesh);
+  // create mesh
+  const sphereMesh = createSphereMesh();
+  sphereMesh.position.y = 5;
+  scene.add(sphereMesh);
 
-  // rigid body for the cube
-  const boxShape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
-  const boxBody = new CANNON.Body({
+  // rigid body for the mesh
+  const sphereShape = new CANNON.Sphere(0.5);
+  const sphereBody = new CANNON.Body({
     mass: 1,
     position: new CANNON.Vec3(
-      cubeMesh.position.x,
-      cubeMesh.position.y,
-      cubeMesh.position.z),
-    shape: boxShape
+      sphereMesh.position.x,
+      sphereMesh.position.y,
+      sphereMesh.position.z
+    ),
+    shape: sphereShape
   });
-  boxBody.material = plasticMat;
-  world.addBody(boxBody);
+  sphereBody.material = plasticMat;
+  world.addBody(sphereBody);
+
+  // starting force
+  // sphereBody.applyLocalForce(new CANNON.Vec3(150, 0, 0), new CANNON.Vec3(0, 0, 0));
 
   // create camera
   const cam = new PerspectiveCamera(75, 4 / 3, 0.1, 1000);
@@ -154,23 +158,11 @@ async function main() {
   });
 
   // create debug GUI
-  // const gui = new GUI({
-  //   width: 350
-  // });
-  // gui
-  //   .add(cubeMesh.position, 'y')
-  //   .min(-3)
-  //   .max(3)
-  //   .step(0.01)
-  //   .name('elevation');
-  // gui.add(cubeMesh, 'visible');
-  // gui.add(cubeMat, 'wireframe');
-  // gui
-  //   .addColor(debugParams, 'color')
-  //   .onChange(() => {
-  //     cubeMat.color.set(debugParams.color);
-  //   });
-  // gui.close();
+  const gui = new GUI({
+    width: 350
+  });
+  gui.add(debugParams, 'left2RightWind');
+  gui.add(debugParams, 'right2LeftWind');
 
   // start animation loop
   renderer.setAnimationLoop((currTime) => {
@@ -186,8 +178,14 @@ async function main() {
     oldElapsedTime = elapsedTime;
 
     // Update physics
+    if (debugParams.left2RightWind) {
+      sphereBody.applyForce(new CANNON.Vec3(0.15, 0, 0), sphereBody.position); // simulate wind
+    }
+    if (debugParams.right2LeftWind) {
+      sphereBody.applyForce(new CANNON.Vec3(-0.15, 0, 0), sphereBody.position); // simulate wind
+    }
     world.step(1 / 60, deltaTime);
-    cubeMesh.position.copy(new Vector3(boxBody.position.x, boxBody.position.y, boxBody.position.z));
+    sphereMesh.position.copy(new Vector3(sphereBody.position.x, sphereBody.position.y, sphereBody.position.z));
 
     requestAnimationFrame(tick);
   };
@@ -226,6 +224,14 @@ async function createTextMesh(fontLoader: FontLoader, textureLoader: TextureLoad
   // center the text geometry inside the mesh
   textGeometry.center();
   return new Mesh(textGeometry, textMaterial);
+}
+
+function createSphereMesh() {
+  const geo = new SphereGeometry(0.5);
+  const mat = new MeshBasicMaterial({
+    color: 'red'
+  });
+  return new Mesh(geo, mat);
 }
 
 function createCubeMesh() {
