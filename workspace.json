@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "cg-particles": "apps/cg/particles",
+    "cg-physics": "apps/cg/physics",
     "cg-raycast": "apps/cg/raycast",
     "cg-scroll-animation": "apps/cg/scroll-animation",
     "cg-static-cube": "apps/cg/static-cube",
