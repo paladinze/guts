@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "cg-model-viewer": "apps/cg/model-viewer",
     "cg-particles": "apps/cg/particles",
     "cg-physics": "apps/cg/physics",
     "cg-raycast": "apps/cg/raycast",

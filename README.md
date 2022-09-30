@@ -12,9 +12,11 @@ apps
     └── block-editor
     └── websocket-server
 └── cg # computer graphics demo (mostly based on WebGL & Three.js)
+    └── static-cube
     └── particles
     └── raycast
-    └── static-cube
+    └── physics
+    └── model-viewer
 └── cloud # cloud computing
     └── otel-client: frontend with OpenTelemetry tracing
     └── otel-servers: backend with OpenTelemetry tracing
