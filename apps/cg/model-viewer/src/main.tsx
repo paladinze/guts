@@ -1,18 +1,18 @@
 import {
   AmbientLight,
+  AnimationMixer,
   AxesHelper,
   Clock,
   Color,
   GridHelper,
   Group,
   Mesh,
-  MeshBasicMaterial,
   MeshMatcapMaterial,
   PerspectiveCamera,
   Scene,
-  SphereGeometry,
   SpotLight,
-  TextureLoader, Vector3,
+  TextureLoader,
+  Vector3,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -25,7 +25,10 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 const debugParams = {
   showDuckModel: false,
-  showHelmetModel: true
+  showHelmetModel: true,
+  showFoxModel: true,
+  shakeHead: () => {},
+  run: () => {}
 };
 
 const gltfLoader = new GLTFLoader();
@@ -83,7 +86,6 @@ async function main() {
   spotLight.target.position.set(0, 0, 0);
   scene.add(spotLight.target);
 
-
   // create font
   const textMesh = await createTextMesh(fontLoader, textureLoader);
   textMesh.position.y = 5;
@@ -96,6 +98,19 @@ async function main() {
   // helmet mesh
   const helmetMesh = await loadHelmet();
   scene.add(helmetMesh);
+
+  // fox mesh
+  const { mesh: foxMesh, mixer, clip1, clip2 } = await loadFox();
+  clip1.play();
+  scene.add(foxMesh);
+  debugParams.shakeHead = () => {
+    mixer.stopAllAction();
+    clip1.play();
+  };
+  debugParams.run = () => {
+    mixer.stopAllAction();
+    clip2.play();
+  };
 
   // create camera
   const cam = new PerspectiveCamera(75, 4 / 3, 0.1, 1000);
@@ -118,7 +133,7 @@ async function main() {
   // camera controls
   const controls = new OrbitControls(cam, canvas);
   controls.autoRotate = true;
-  controls.autoRotateSpeed = -Math.PI * 1;
+  controls.autoRotateSpeed = -Math.PI * 0.5;
   controls.enableDamping = true;
   controls.target = new Vector3(0, 2, 0);
 
@@ -169,14 +184,18 @@ async function main() {
   gui.add(debugParams, 'showHelmetModel').onChange((val: boolean) => {
     helmetMesh.visible = val;
   });
+  gui.add(debugParams, 'showFoxModel').onChange((val: boolean) => {
+    foxMesh.visible = val;
+  });
+  const guiFox = gui.addFolder('Fox clips');
+  guiFox.add(debugParams, 'run');
+  guiFox.add(debugParams, 'shakeHead');
 
   // start animation loop
   const clock = new Clock();
   renderer.setAnimationLoop((currTime) => {
     controls.update();
-
-    // cam.rotateY(clock.getElapsedTime())
-
+    mixer.update(clock.getDelta());
     renderer.render(scene, cam);
   });
 }
@@ -215,14 +234,6 @@ async function createTextMesh(fontLoader: FontLoader, textureLoader: TextureLoad
   return new Mesh(textGeometry, textMaterial);
 }
 
-function createSphereMesh() {
-  const geo = new SphereGeometry(0.5);
-  const mat = new MeshBasicMaterial({
-    color: 'red'
-  });
-  return new Mesh(geo, mat);
-}
-
 async function loadDuckModel() {
   // const gltf = await gltfLoader.loadAsync('assets/models/Duck/glTF/Duck.gltf');
   const gltf = await gltfLoader.loadAsync('assets/models/Duck/glTF-Draco/Duck.gltf');
@@ -241,4 +252,21 @@ async function loadHelmet() {
   mesh.scale.setScalar(6.5);
   mesh.visible = debugParams.showHelmetModel;
   return mesh;
+}
+
+async function loadFox() {
+  const gltf = await gltfLoader.loadAsync('assets/models/Fox/glTF/Fox.gltf');
+  const mesh = gltf.scene;
+  mesh.scale.setScalar(0.02);
+  mesh.position.x = 2.0;
+  mesh.visible = debugParams.showFoxModel;
+  const mixer = new AnimationMixer(mesh);
+  const clip1 = mixer.clipAction(gltf.animations[0]);
+  const clip2 = mixer.clipAction(gltf.animations[1]);
+  return {
+    mesh,
+    mixer,
+    clip1,
+    clip2
+  };
 }
