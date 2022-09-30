@@ -21,6 +21,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import * as CANNON from 'cannon-es';
 import GUI from 'lil-gui';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 const debugParams = {
   showDuckModel: false,
@@ -28,7 +29,9 @@ const debugParams = {
 };
 
 const gltfLoader = new GLTFLoader();
-
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('assets/draco/');
+gltfLoader.setDRACOLoader(dracoLoader);
 
 async function main() {
   /**
@@ -221,7 +224,8 @@ function createSphereMesh() {
 }
 
 async function loadDuckModel() {
-  const gltf = await gltfLoader.loadAsync('assets/models/Duck/glTF/Duck.gltf');
+  // const gltf = await gltfLoader.loadAsync('assets/models/Duck/glTF/Duck.gltf');
+  const gltf = await gltfLoader.loadAsync('assets/models/Duck/glTF-Draco/Duck.gltf');
   const mesh = gltf.scene.children[0];
   mesh.scale.setScalar(0.02);
   mesh.visible = debugParams.showDuckModel;
