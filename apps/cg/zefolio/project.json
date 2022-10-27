@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cg/zefolio/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cg/zefolio",
+        "index": "apps/cg/zefolio/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cg/zefolio/src/main.tsx",
+        "polyfills": "apps/cg/zefolio/src/polyfills.ts",
+        "tsConfig": "apps/cg/zefolio/tsconfig.app.json",
+        "assets": [
+          "apps/cg/zefolio/src/favicon.ico",
+          "apps/cg/zefolio/src/assets"
+        ],
+        "styles": ["apps/cg/zefolio/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cg/zefolio/src/environments/environment.ts",
+              "with": "apps/cg/zefolio/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cg-zefolio:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cg-zefolio:build:development"
+        },
+        "production": {
+          "buildTarget": "cg-zefolio:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cg/zefolio/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cg/zefolio"],
+      "options": {
+        "jestConfig": "apps/cg/zefolio/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -8,6 +8,8 @@
     "cg-raycast": "apps/cg/raycast",
     "cg-scroll-animation": "apps/cg/scroll-animation",
     "cg-static-cube": "apps/cg/static-cube",
+    "cg-zefolio": "apps/cg/zefolio",
+    "cg-zefolio-e2e": "apps/cg/zefolio-e2e",
     "cloud-otel-client": "apps/cloud/otel-client",
     "toy-block-editor": "apps/toy/block-editor",
     "toy-google-doc": "apps/toy/google-doc",
