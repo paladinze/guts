@@ -1,5 +1,14 @@
 import * as THREE from 'three';
-import { BoxGeometry, Mesh, MeshNormalMaterial, PerspectiveCamera, Scene, ShaderMaterial, WebGLRenderer } from 'three';
+import {
+  BoxGeometry,
+  Mesh,
+  MeshNormalMaterial,
+  PerspectiveCamera,
+  PlaneGeometry,
+  Scene,
+  ShaderMaterial,
+  WebGLRenderer
+} from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragmentShader from './shaders/fragment-shader.glsl';
 import vertexShader from './shaders/vertex-shader.glsl';
@@ -13,11 +22,12 @@ export default class Sketch {
   private scene: Scene;
   private time: number;
   private renderer: WebGLRenderer;
-  private mesh: Mesh<BoxGeometry, ShaderMaterial>;
+  private mesh: Mesh<PlaneGeometry, ShaderMaterial>;
   private width: number;
   private height: number;
   private container: HTMLElement;
   private controls: OrbitControls;
+  private material: ShaderMaterial;
 
   constructor(options: sketchOptions) {
     this.setupScene(options);
@@ -68,24 +78,31 @@ export default class Sketch {
 
   setupControls() {
     this.controls = new OrbitControls(this.camera, this.container);
-    this.controls.autoRotate = true;
+    // this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = -Math.PI * 0.5;
     this.controls.enableDamping = true;
   }
 
   addObjects() {
-    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+    const geometry = new THREE.PlaneGeometry(4, 4, 50, 50);
     // const material = new THREE.MeshNormalMaterial();
-    const shaderMaterial = new THREE.ShaderMaterial({
+    this.material = new THREE.ShaderMaterial({
       vertexShader: vertexShader,
-      fragmentShader: fragmentShader
+      fragmentShader: fragmentShader,
+      uniforms: {
+        time: { value: this.time }
+      },
+      wireframe: true,
+      side: THREE.DoubleSide
     })
-    this.mesh = new THREE.Mesh(geometry, shaderMaterial);
+    this.mesh = new THREE.Mesh(geometry, this.material);
     this.scene.add(this.mesh);
 
   }
 
   render() {
+    this.time += 0.05;
+    this.material.uniforms['time'].value = this.time;
     this.renderer.render(this.scene, this.camera);
 
     this.controls.update();
