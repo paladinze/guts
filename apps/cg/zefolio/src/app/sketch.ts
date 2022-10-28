@@ -6,7 +6,7 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
-  ShaderMaterial,
+  ShaderMaterial, TextureLoader,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -90,7 +90,10 @@ export default class Sketch {
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
       uniforms: {
-        time: { value: this.time }
+        time: { value: this.time },
+        oceanTexture: {
+          value: new TextureLoader().load('assets/imgs/ocean.jpg')
+        }
       },
       // wireframe: true,
       side: THREE.DoubleSide
