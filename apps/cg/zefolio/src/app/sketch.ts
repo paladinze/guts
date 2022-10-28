@@ -84,7 +84,7 @@ export default class Sketch {
   }
 
   addObjects() {
-    const geometry = new THREE.PlaneGeometry(4, 4, 50, 50);
+    const geometry = new THREE.PlaneGeometry(4, 4, 150, 150);
     // const material = new THREE.MeshNormalMaterial();
     this.material = new THREE.ShaderMaterial({
       vertexShader: vertexShader,
@@ -92,7 +92,7 @@ export default class Sketch {
       uniforms: {
         time: { value: this.time }
       },
-      wireframe: true,
+      // wireframe: true,
       side: THREE.DoubleSide
     })
     this.mesh = new THREE.Mesh(geometry, this.material);

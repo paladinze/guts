@@ -75,9 +75,11 @@ float cnoise(vec3 P){
 
 uniform float time;
 varying float vNoise;
+varying vec2 vUv;
 
 void main() {
   vec3 newPos = position;
+  vUv = uv;
   const float PI = 3.1415926535897932384626433832795;
 
 //  newPos.z += 0.1 * sin((newPos.x + 0.25 + time) * 2.0 * PI);
