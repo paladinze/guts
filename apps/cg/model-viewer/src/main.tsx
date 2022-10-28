@@ -138,7 +138,7 @@ async function main() {
   controls.target = new Vector3(0, 2, 0);
 
 
-// set viewport resolution and canvas size
+  // set viewport resolution and canvas size
   function resize() {
     const dpr = window.devicePixelRatio;
     const width = window.innerWidth;

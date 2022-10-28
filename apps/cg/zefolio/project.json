@@ -21,7 +21,7 @@
         ],
         "styles": ["apps/cg/zefolio/src/styles.css"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "apps/cg/zefolio/webpack.config.js"
       },
       "configurations": {
         "development": {
