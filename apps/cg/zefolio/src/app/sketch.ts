@@ -6,12 +6,13 @@ import {
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
-  ShaderMaterial, TextureLoader,
+  ShaderMaterial, SphereGeometry, TextureLoader,
   WebGLRenderer
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragmentShader from './shaders/fragment-shader.glsl';
 import vertexShader from './shaders/vertex-shader.glsl';
+import { Geometry } from 'three/examples/jsm/deprecated/Geometry';
 
 interface sketchOptions {
   dom: HTMLElement;
@@ -22,7 +23,7 @@ export default class Sketch {
   private scene: Scene;
   private time: number;
   private renderer: WebGLRenderer;
-  private mesh: Mesh<PlaneGeometry, ShaderMaterial>;
+  private mesh: Mesh<SphereGeometry, ShaderMaterial>;
   private width: number;
   private height: number;
   private container: HTMLElement;
@@ -84,8 +85,8 @@ export default class Sketch {
   }
 
   addObjects() {
-    const geometry = new THREE.PlaneGeometry(4, 4, 150, 150);
-    // const material = new THREE.MeshNormalMaterial();
+    // const geometry = new THREE.PlaneGeometry(1, 1, 50, 50);
+    const geometry = new THREE.SphereGeometry(0.4, 50, 50);
     this.material = new THREE.ShaderMaterial({
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
