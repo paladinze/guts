@@ -96,7 +96,7 @@ export default class Sketch {
           value: new TextureLoader().load('assets/imgs/ocean.jpg')
         }
       },
-      // wireframe: true,
+      wireframe: true,
       side: THREE.DoubleSide
     })
     this.mesh = new THREE.Mesh(geometry, this.material);

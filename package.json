@@ -66,6 +66,7 @@
     "@opentelemetry/sdk-trace-base": "^1.7.0",
     "@opentelemetry/sdk-trace-web": "^1.7.0",
     "@opentelemetry/semantic-conventions": "^1.7.0",
+    "@react-three/fiber": "^8.9.0",
     "@types/quill": "^2.0.9",
     "cannon-es": "^0.20.0",
     "core-js": "^3.6.5",
