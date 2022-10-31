@@ -1,22 +1,14 @@
 import { DoubleSide, Group, Mesh } from 'three';
-import { extend, ReactThreeFiber, useFrame, useThree } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import CustomMesh from './custom-mesh';
-
-extend({ OrbitControls: OrbitControls });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'orbitControls': ReactThreeFiber.Object3DNode<OrbitControls, typeof OrbitControls>;
-    }
-  }
-}
+import { Float, Html, MeshReflectorMaterial, OrbitControls, PivotControls, Text } from '@react-three/drei';
 
 export default function Sketch() {
   const cubeRef = useRef<Mesh>(null!);
+  const sphereRef = useRef<Mesh>(null!);
   const planeRef = useRef<Mesh>(null!);
+  const groundRef = useRef<Mesh>(null!);
   const groupRef = useRef<Group>(null!);
 
   const { camera, gl } = useThree();
@@ -30,31 +22,61 @@ export default function Sketch() {
 
     cubeRef.current.rotation.y += delta;
     planeRef.current.rotation.y += delta;
-    groupRef.current.rotation.y += delta * 0.05;
+    // groupRef.current.rotation.y += delta * 0.05;
   });
 
 
   return <>
     <ambientLight intensity={0.1} />
     <directionalLight color='blue' position={[3, 0, 5]} />
-    <orbitControls args={ [ camera, gl.domElement ] } />
+    <OrbitControls enableDamping={true} makeDefault />
+    <Text
+      font='assets/fonts/Bangers-Regular.ttf'
+      color='salmon' fontSize={2} position={[0, 3, 3]}
+      maxWidth={2}
+      outlineWidth={0.05}
+      outlineColor={'black'}
+      outlineOpacity={0.7}
+      textAlign='center'
+    >
+      R3F Starter
+    </Text>
     <group ref={groupRef}>
-      <CustomMesh />
+      <Float speed={5} floatIntensity={1.5}>
+        <CustomMesh position-y={4} />
+      </Float>
       <mesh ref={cubeRef}>
         <boxGeometry />
         <meshStandardMaterial />
       </mesh>
-      <mesh position-x={-3}>
-        <sphereGeometry />
-        <meshBasicMaterial color='orange' />
-      </mesh>
+      {/*<TransformControls object={cubeRef} mode={'rotate'} />*/}
+      <PivotControls anchor={[0, 0, 0]} depthTest={false}>
+        <mesh position-x={-3} ref={sphereRef}>
+          <Html wrapperClass='sphere-label'
+                position={[0, 0, 0]}
+                center
+                distanceFactor={8} // simulate perspective
+                occlude={[cubeRef, groundRef]} // hidden when behind the cube
+          >
+            A Sphere
+          </Html>
+          <sphereGeometry />
+          <meshBasicMaterial color='orange' />
+        </mesh>
+      </PivotControls>
       <mesh position-x={3} rotation-y={Math.PI / 5} ref={planeRef}>
         <planeGeometry />
         <meshBasicMaterial color={'red'} side={DoubleSide} />
       </mesh>
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
+      <mesh ref={groundRef} position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
-        <meshBasicMaterial color='greenyellow' />
+        <MeshReflectorMaterial
+          mirror={0.5}
+          resolution={512}
+          blur={[1000, 1000]}
+          color='lightgrey'
+          mixBlur={1} />
+        {/*<meshBasicMaterial color='greenyellow' side={DoubleSide} />*/}
       </mesh>
     </group>
   </>;

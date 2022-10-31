@@ -5,7 +5,7 @@ import { Geometry } from 'three/examples/jsm/deprecated/Geometry';
 const verticesCount = 10 * 3; // 10 triangles * 3 vertices
 
 
-export default function CustomMesh() {
+export default function CustomMesh(props: any) {
   const geoRef = useRef<BufferGeometry>(null!);
 
   const positions = useMemo(() => {
@@ -21,7 +21,7 @@ export default function CustomMesh() {
     geoRef.current.computeVertexNormals();
   }, []);
 
-  return <mesh position-y={3} scale={1}>
+  return <mesh scale={1} {...props}>
     <bufferGeometry ref={geoRef}>
       <bufferAttribute
         attach='attributes-position'
