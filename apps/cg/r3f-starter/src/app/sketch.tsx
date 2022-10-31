@@ -2,6 +2,7 @@ import { DoubleSide, Group, Mesh } from 'three';
 import { extend, ReactThreeFiber, useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import CustomMesh from './custom-mesh';
 
 extend({ OrbitControls: OrbitControls });
 
@@ -32,6 +33,7 @@ export default function Sketch() {
     <directionalLight color='blue' position={[3, 0, 5]} />
     <orbitControls args={ [ camera, gl.domElement ] } />
     <group ref={groupRef}>
+      <CustomMesh />
       <mesh ref={cubeRef}>
         <boxGeometry />
         <meshStandardMaterial />
