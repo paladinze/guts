@@ -22,6 +22,12 @@ export default function Sketch() {
   const { camera, gl } = useThree();
 
   useFrame((state, delta) => {
+    // rotating camera around the center
+    // const elapseTime = state.clock.getElapsedTime();
+    // state.camera.position.x = Math.sin(elapseTime * 0.1) * 8;
+    // state.camera.position.z = Math.cos(elapseTime * 0.1) * 8;
+    // state.camera.lookAt(0, 0, 0);
+
     cubeRef.current.rotation.y += delta;
     planeRef.current.rotation.y += delta;
     groupRef.current.rotation.y += delta * 0.05;
