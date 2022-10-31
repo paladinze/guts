@@ -1,10 +1,12 @@
 import { Canvas } from '@react-three/fiber';
 import Sketch from './sketch';
 import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three';
+import { Leva } from 'leva';
 
 export function App() {
   return (
     <>
+      <Leva collapsed={false} />
       <div id='canvas-container'>
         <Canvas
           dpr={[1, 2]} // dpr range

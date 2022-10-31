@@ -2,6 +2,7 @@ import { DoubleSide, Group, Mesh } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import CustomMesh from './custom-mesh';
+import { button, useControls } from 'leva';
 import { Float, Html, MeshReflectorMaterial, OrbitControls, PivotControls, Text } from '@react-three/drei';
 
 export default function Sketch() {
@@ -10,6 +11,37 @@ export default function Sketch() {
   const planeRef = useRef<Mesh>(null!);
   const groundRef = useRef<Mesh>(null!);
   const groupRef = useRef<Group>(null!);
+  const debugControls = useControls('scene', {
+    titlePos: {
+      value: 3,
+      min: -2,
+      max: 5,
+      step: 0.1
+    },
+    cubePos: {
+      value: {
+        x: 0,
+        y: 0,
+      },
+      step: 0.01,
+      joystick: 'invertY'
+    },
+    sphereColor: 'orange',
+    customAction: button(() => console.log('custom action!')),
+    choices: {
+      options: [1, 2, 3]
+    }
+  });
+  const cubeDebugControls = useControls('cube', {
+    cubePos: {
+      value: {
+        x: 0,
+        y: 0,
+      },
+      step: 0.01,
+      joystick: 'invertY'
+    },
+  });
 
   const { camera, gl } = useThree();
 
@@ -32,7 +64,7 @@ export default function Sketch() {
     <OrbitControls enableDamping={true} makeDefault />
     <Text
       font='assets/fonts/Bangers-Regular.ttf'
-      color='salmon' fontSize={2} position={[0, 3, 3]}
+      color='salmon' fontSize={2} position={[0, debugControls.titlePos, 3]}
       maxWidth={2}
       outlineWidth={0.05}
       outlineColor={'black'}
@@ -45,7 +77,7 @@ export default function Sketch() {
       <Float speed={5} floatIntensity={1.5}>
         <CustomMesh position-y={4} />
       </Float>
-      <mesh ref={cubeRef}>
+      <mesh ref={cubeRef} position={[cubeDebugControls.cubePos.x, cubeDebugControls.cubePos.y, 0]}>
         <boxGeometry />
         <meshStandardMaterial />
       </mesh>
@@ -61,7 +93,7 @@ export default function Sketch() {
             A Sphere
           </Html>
           <sphereGeometry />
-          <meshBasicMaterial color='orange' />
+          <meshBasicMaterial color={debugControls.sphereColor} />
         </mesh>
       </PivotControls>
       <mesh position-x={3} rotation-y={Math.PI / 5} ref={planeRef}>
