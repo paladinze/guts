@@ -5,6 +5,7 @@
     "cg-model-viewer": "apps/cg/model-viewer",
     "cg-particles": "apps/cg/particles",
     "cg-physics": "apps/cg/physics",
+    "cg-r3f-baked-scene": "apps/cg/r3f-baked-scene",
     "cg-r3f-model": "apps/cg/r3f-model",
     "cg-r3f-starter": "apps/cg/r3f-starter",
     "cg-r3f-text": "apps/cg/r3f-text",

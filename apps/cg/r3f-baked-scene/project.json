@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cg/r3f-baked-scene/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cg/r3f-baked-scene",
+        "index": "apps/cg/r3f-baked-scene/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cg/r3f-baked-scene/src/main.tsx",
+        "polyfills": "apps/cg/r3f-baked-scene/src/polyfills.ts",
+        "tsConfig": "apps/cg/r3f-baked-scene/tsconfig.app.json",
+        "assets": [
+          "apps/cg/r3f-baked-scene/src/favicon.ico",
+          "apps/cg/r3f-baked-scene/src/assets"
+        ],
+        "styles": ["apps/cg/r3f-baked-scene/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/cg/r3f-baked-scene/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cg/r3f-baked-scene/src/environments/environment.ts",
+              "with": "apps/cg/r3f-baked-scene/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cg-r3f-baked-scene:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cg-r3f-baked-scene:build:development"
+        },
+        "production": {
+          "buildTarget": "cg-r3f-baked-scene:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cg/r3f-baked-scene/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cg/r3f-baked-scene"],
+      "options": {
+        "jestConfig": "apps/cg/r3f-baked-scene/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
