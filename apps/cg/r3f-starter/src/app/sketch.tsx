@@ -3,7 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import CustomMesh from './custom-mesh';
 import { button, useControls } from 'leva';
-import { Float, Html, OrbitControls, PivotControls, softShadows, Text, useHelper } from '@react-three/drei';
+import { Float, Html, OrbitControls, PivotControls, Sky, softShadows, Text, useHelper } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 // PCSS soft shadow: heavy impact on performance
@@ -59,6 +59,11 @@ export default function Sketch() {
       joystick: 'invertY'
     }
   });
+  const skyDebugControls = useControls('sky', {
+    sunPos: {
+      value: [-3, 5, 5]
+    }
+  });
 
   const { camera, gl } = useThree();
 
@@ -77,10 +82,11 @@ export default function Sketch() {
 
   return <>
     {debugControls.perfPanelVisible && <Perf position='top-left' />}
+    <Sky sunPosition={skyDebugControls.sunPos} />
     <ambientLight intensity={0.1} />
     <directionalLight
       ref={directionalLightRef}
-      color='pink' position={[-3, 5, 5]}
+      color='pink' position={skyDebugControls.sunPos}
       castShadow={true}
       shadow-mapSize={[1024, 1024]}
       shadow-camera-near={1}
@@ -143,7 +149,7 @@ export default function Sketch() {
         {/*  side={DoubleSide}*/}
         {/*/>*/}
         {/*<meshBasicMaterial color='greenyellow' side={DoubleSide} />*/}
-        <meshStandardMaterial />
+        <meshStandardMaterial side={DoubleSide} />
       </mesh>
     </group>
   </>;
