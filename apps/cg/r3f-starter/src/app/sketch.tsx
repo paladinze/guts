@@ -3,7 +3,16 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import CustomMesh from './custom-mesh';
 import { button, useControls } from 'leva';
-import { Float, Html, OrbitControls, PivotControls, Sky, softShadows, Text, useHelper } from '@react-three/drei';
+import {
+  Environment,
+  Float,
+  Html, Lightformer,
+  OrbitControls,
+  PivotControls,
+  softShadows,
+  Text,
+  useHelper
+} from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 // PCSS soft shadow: heavy impact on performance
@@ -64,6 +73,9 @@ export default function Sketch() {
       value: [-3, 5, 5]
     }
   });
+  const envControls = useControls('env map', {
+    envMapIntensity: { value: 1.5, min: 0, max: 12, step: 0.5 }
+  });
 
   const { camera, gl } = useThree();
 
@@ -82,7 +94,35 @@ export default function Sketch() {
 
   return <>
     {debugControls.perfPanelVisible && <Perf position='top-left' />}
-    <Sky sunPosition={skyDebugControls.sunPos} />
+    {/*<Sky sunPosition={skyDebugControls.sunPos} />*/}
+    <Environment
+      // background
+      preset="sunset"
+      ground={ {
+        height: 7,
+        radius: 28,
+        scale: 100
+      } }
+      // resolution={ 32 }
+      // files="assets/environmentMaps/hdr/pretville_street_2k.hdr"
+      // files={[
+      //   'assets/environmentMaps/2/px.jpg',
+      //   'assets/environmentMaps/2/nx.jpg',
+      //   'assets/environmentMaps/2/py.jpg',
+      //   'assets/environmentMaps/2/ny.jpg',
+      //   'assets/environmentMaps/2/pz.jpg',
+      //   'assets/environmentMaps/2/nz.jpg'
+      // ]}
+    >
+      {/*<color args={ [ '#000000' ] } attach="background" />*/}
+      {/*<Lightformer*/}
+      {/*  position-z={ - 5 }*/}
+      {/*  scale={ 5 }*/}
+      {/*  color="red"*/}
+      {/*  intensity={ 10 }*/}
+      {/*  form="ring"*/}
+      {/*/>*/}
+    </Environment>
     <ambientLight intensity={0.1} />
     <directionalLight
       ref={directionalLightRef}
@@ -91,10 +131,10 @@ export default function Sketch() {
       shadow-mapSize={[1024, 1024]}
       shadow-camera-near={1}
       shadow-camera-far={10}
-      shadow-camera-top={2}
-      shadow-camera-right={2}
-      shadow-camera-bottom={-2}
-      shadow-camera-left={-2}
+      shadow-camera-top={5}
+      shadow-camera-right={5}
+      shadow-camera-bottom={-5}
+      shadow-camera-left={-5}
     />
     <OrbitControls enableDamping={true} makeDefault />
     {/*
@@ -117,11 +157,11 @@ export default function Sketch() {
       </Float>
       <mesh ref={cubeRef} position={[cubeDebugControls.cubePos.x, cubeDebugControls.cubePos.y, 0]} castShadow={true}>
         <boxGeometry />
-        <meshStandardMaterial />
+        <meshStandardMaterial envMapIntensity={envControls.envMapIntensity} />
       </mesh>
       {/*<TransformControls object={cubeRef} mode={'rotate'} />*/}
       <PivotControls anchor={[0, 0, 0]} depthTest={false}>
-        <mesh position-x={-3} ref={sphereRef}>
+        <mesh position-x={-3} ref={sphereRef} castShadow={true}>
           <Html wrapperClass='sphere-label'
                 position={[0, 0, 0]}
                 center
@@ -131,7 +171,8 @@ export default function Sketch() {
             A Sphere
           </Html>
           <sphereGeometry />
-          <meshBasicMaterial color={debugControls.sphereColor} />
+          <meshStandardMaterial color={debugControls.sphereColor}
+                                envMapIntensity={envControls.envMapIntensity} />
         </mesh>
       </PivotControls>
       <mesh position-x={3} rotation-y={Math.PI / 5} ref={planeRef}>
@@ -149,7 +190,7 @@ export default function Sketch() {
         {/*  side={DoubleSide}*/}
         {/*/>*/}
         {/*<meshBasicMaterial color='greenyellow' side={DoubleSide} />*/}
-        <meshStandardMaterial side={DoubleSide} />
+        <meshStandardMaterial color='greenyellow' side={DoubleSide} envMapIntensity={envControls.envMapIntensity} />
       </mesh>
     </group>
   </>;
