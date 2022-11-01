@@ -7,6 +7,7 @@
     "cg-physics": "apps/cg/physics",
     "cg-r3f-model": "apps/cg/r3f-model",
     "cg-r3f-starter": "apps/cg/r3f-starter",
+    "cg-r3f-text": "apps/cg/r3f-text",
     "cg-raycast": "apps/cg/raycast",
     "cg-scroll-animation": "apps/cg/scroll-animation",
     "cg-static-cube": "apps/cg/static-cube",
