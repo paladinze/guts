@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import CustomMesh from './custom-mesh';
 import { button, useControls } from 'leva';
 import { Float, Html, MeshReflectorMaterial, OrbitControls, PivotControls, Text } from '@react-three/drei';
+import { Perf } from 'r3f-perf';
 
 export default function Sketch() {
   const cubeRef = useRef<Mesh>(null!);
@@ -12,6 +13,7 @@ export default function Sketch() {
   const groundRef = useRef<Mesh>(null!);
   const groupRef = useRef<Group>(null!);
   const debugControls = useControls('scene', {
+    perfPanelVisible: true,
     titlePos: {
       value: 3,
       min: -2,
@@ -59,6 +61,7 @@ export default function Sketch() {
 
 
   return <>
+    {debugControls.perfPanelVisible && <Perf position='top-left' />}
     <ambientLight intensity={0.1} />
     <directionalLight color='blue' position={[3, 0, 5]} />
     <OrbitControls enableDamping={true} makeDefault />
