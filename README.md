@@ -17,9 +17,13 @@ apps
     └── raycast
     └── physics
     └── model-viewer
+    └── r3f-starter: basic rendering features of React Three fiber (R3F)
+    └── r3f-model: glTF (with draco) model imports and animation
+    └── r3f-text: 3D text with matcap material
+    └── r3f-baked-scene: render a baked scene + shader material
 └── cloud # cloud computing
-    └── otel-client: frontend with OpenTelemetry tracing
-    └── otel-servers: backend with OpenTelemetry tracing
+    └── otel-client: JS frontend with OpenTelemetry tracing
+    └── otel-servers: JS backend with OpenTelemetry tracing
 libs
 └── toy # toy implementation of interesting concepts
     └── mini-webpack
