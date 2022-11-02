@@ -35,16 +35,17 @@ export default function HomeSketch() {
     <Environment preset={'city'} />
     {/*<color args={['#695656']} attach={'background'} />*/}
 
-    <EffectComposer>
-      <Glitch
-        delay={new Vector2(60, 300)} // min and max glitch delay
-        duration={new Vector2(0.6, 1.0)} // min and max glitch duration
-        strength={new Vector2(0.3, 1.0)} // min and max glitch strength
-        mode={GlitchMode.SPORADIC} // glitch mode
-        active={true} // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
-        ratio={0.05} // Threshold for strong glitches, 0 - no weak glitches, 1 - no strong glitches.
-      />
-    </EffectComposer>
+    {/*<EffectComposer>*/}
+    {/*  <Glitch*/}
+    {/*    delay={new Vector2(30, 60)} // min and max glitch delay*/}
+    {/*    duration={new Vector2(0.6, 1.0)} // min and max glitch duration*/}
+    {/*    strength={new Vector2(0.3, 1.0)} // min and max glitch strength*/}
+    {/*    mode={GlitchMode.SPORADIC} // glitch mode*/}
+    {/*    active={true} // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)*/}
+    {/*    ratio={1} // Threshold for strong glitches, 0 - no weak glitches, 1 - no strong glitches.*/}
+    {/*  />*/}
+    {/*</EffectComposer>*/}
+
     <PresentationControls
       global
       rotation={[0.13, 0.1, 0]}

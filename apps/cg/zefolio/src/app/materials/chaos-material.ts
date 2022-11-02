@@ -8,8 +8,8 @@ import { extend, ReactThreeFiber } from '@react-three/fiber';
 const PortalMaterial = shaderMaterial(
   {
     uTime: 0,
-    uColorStart: new THREE.Color('#B25068'),
-    uColorEnd: new THREE.Color('#4C3A51')
+    uColorStart: new THREE.Color('#C06C84'),
+    uColorEnd: new THREE.Color('#6C5B7B')
   },
   portalVertexShader,
   portalFragmentShader
