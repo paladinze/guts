@@ -5,11 +5,19 @@
   padding: 0;
 }
 
-canvas {
-  display: block;
-}
-
 #canvas-container {
   width: 100vw;
   height: 100vh;
+}
+
+#canvas-container > canvas {
+  touch-action: none;
+}
+
+.screen-iframe-container iframe {
+  width: 1024px;
+  height: 670px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
 }
