@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+#canvas-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sphere-label > div {
+  font-family: Helvetica, Arial, sans-serif;
+  position: absolute;
+  background: #00000088;
+  color: white;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 30px;
+  user-select: none;
+}
