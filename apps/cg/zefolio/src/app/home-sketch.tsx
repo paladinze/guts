@@ -1,23 +1,31 @@
-import { ContactShadows, Environment, Float, PresentationControls, Sparkles, Text, useGLTF } from '@react-three/drei';
+import {
+  Clone,
+  ContactShadows,
+  Environment,
+  Float,
+  PresentationControls,
+  Sparkles,
+  Text,
+} from '@react-three/drei';
 import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Mesh, Vector2 } from 'three';
+import { Mesh, ShaderMaterial, Vector2 } from 'three';
 import { useRef } from 'react';
 import { EffectComposer, Glitch } from '@react-three/postprocessing';
 import { GlitchMode } from 'postprocessing';
-
+import './materials/chaos-material';
+import StarModel from './components/star-model';
 
 export default function HomeSketch() {
 
-  const starRef = useRef<Mesh>(null!);
-  const starModel = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/star/model.gltf');
+  const portalMatRef = useRef<ShaderMaterial>(null!);
 
+  const sphereRef = useRef<Mesh>(null!);
 
   useFrame((state, delta) => {
-    if (starRef.current) {
-      // starRef.current.rotation.y += delta * 2.0;
-    }
+    // @ts-ignore
+    portalMatRef.current.uTime += delta * 3;
   });
 
   return <>
@@ -29,7 +37,7 @@ export default function HomeSketch() {
 
     <EffectComposer>
       <Glitch
-        delay={new Vector2(30, 60)} // min and max glitch delay
+        delay={new Vector2(60, 300)} // min and max glitch delay
         duration={new Vector2(0.6, 1.0)} // min and max glitch duration
         strength={new Vector2(0.3, 1.0)} // min and max glitch strength
         mode={GlitchMode.SPORADIC} // glitch mode
@@ -87,21 +95,11 @@ export default function HomeSketch() {
       blur={2.4}
     />
 
+    <mesh position={[0, 0, -10]} scale={5} ref={sphereRef}>
+      <sphereGeometry args={[1, 128, 128]} />
+      <portalMaterial ref={portalMatRef} />
+    </mesh>
 
-    <Float rotationIntensity={0.2}>
-      <primitive
-        onClick={() => {
-          if (window) {
-            // @ts-ignore
-            window.open('https://github.com/paladinze', '_blank').focus();
-          }
-        }}
-        object={starModel.scene} ref={starRef}
-        position={[3, -1, 0]} scale={0.5}
-        rotation-y={0.2}
-      >
-      </primitive>
-    </Float>
-
+    <StarModel />
   </>;
 }
