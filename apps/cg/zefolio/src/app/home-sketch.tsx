@@ -2,8 +2,10 @@ import { ContactShadows, Environment, Float, PresentationControls, Sparkles, Tex
 import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Mesh } from 'three';
+import { Mesh, Vector2 } from 'three';
 import { useRef } from 'react';
+import { EffectComposer, Glitch } from '@react-three/postprocessing';
+import { GlitchMode } from 'postprocessing';
 
 
 export default function HomeSketch() {
@@ -23,8 +25,18 @@ export default function HomeSketch() {
     <ambientLight intensity={1.0} />
 
     <Environment preset={'city'} />
-    <color args={['#695656']} attach={'background'} />
+    {/*<color args={['#695656']} attach={'background'} />*/}
 
+    <EffectComposer>
+      <Glitch
+        delay={new Vector2(30, 60)} // min and max glitch delay
+        duration={new Vector2(0.6, 1.0)} // min and max glitch duration
+        strength={new Vector2(0.3, 1.0)} // min and max glitch strength
+        mode={GlitchMode.SPORADIC} // glitch mode
+        active={true} // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
+        ratio={0.05} // Threshold for strong glitches, 0 - no weak glitches, 1 - no strong glitches.
+      />
+    </EffectComposer>
     <PresentationControls
       global
       rotation={[0.13, 0.1, 0]}
@@ -58,7 +70,7 @@ export default function HomeSketch() {
         </Text>
         <Sparkles
           count={15}
-          size={10}
+          size={3}
           scale={[4, 3, 3]}
           position={[-3.5, 0.75, 0.75]}
           speed={0.1}
