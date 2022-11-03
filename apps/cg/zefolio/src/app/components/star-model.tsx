@@ -11,12 +11,6 @@ export default function Model(props) {
   return <>
     <Float rotationIntensity={0.2}>
       <Clone
-        onClick={() => {
-          if (window) {
-            // @ts-ignore
-            window.open('https://github.com/paladinze', '_blank').focus();
-          }
-        }}
         object={starModel.scene}
         position={[4, 1, 0]} scale={0.5}
         rotation-y={0.2}
@@ -27,12 +21,6 @@ export default function Model(props) {
 
     <Float rotationIntensity={0.2}>
       <Clone
-        onClick={() => {
-          if (window) {
-            // @ts-ignore
-            window.open('https://github.com/paladinze', '_blank').focus();
-          }
-        }}
         object={starModel.scene}
         position={[3, 2, 0]} scale={0.5}
         rotation-y={-0.1}
@@ -42,12 +30,6 @@ export default function Model(props) {
 
     <Float rotationIntensity={0.2}>
       <Clone
-        onClick={() => {
-          if (window) {
-            // @ts-ignore
-            window.open('https://github.com/paladinze', '_blank').focus();
-          }
-        }}
         object={starModel.scene}
         position={[3.5, 0, 0]} scale={0.5}
         rotation-y={0.2}
@@ -58,12 +40,6 @@ export default function Model(props) {
 
     <Float rotationIntensity={0.2}>
       <Clone
-        onClick={() => {
-          if (window) {
-            // @ts-ignore
-            window.open('https://github.com/paladinze', '_blank').focus();
-          }
-        }}
         object={starModel.scene}
         position={[3, -1, 0]} scale={0.5}
         rotation-y={0.2}

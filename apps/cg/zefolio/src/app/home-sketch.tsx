@@ -24,6 +24,7 @@ export default function HomeSketch() {
     <Environment preset={'city'} />
 
     <PresentationControls
+      enabled={true}
       global={false}
       rotation={[0.13, 0.1, 0]}
       polar={[-0.4, 0.2]}
