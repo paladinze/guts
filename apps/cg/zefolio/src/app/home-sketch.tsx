@@ -1,19 +1,9 @@
-import {
-  Clone,
-  ContactShadows,
-  Environment,
-  Float,
-  PresentationControls,
-  Sparkles,
-  Text,
-} from '@react-three/drei';
+import { Environment, Float, PresentationControls, Sparkles, Text } from '@react-three/drei';
 import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Mesh, ShaderMaterial, Vector2 } from 'three';
+import { Mesh, ShaderMaterial } from 'three';
 import { useRef } from 'react';
-import { EffectComposer, Glitch } from '@react-three/postprocessing';
-import { GlitchMode } from 'postprocessing';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
 
@@ -29,25 +19,12 @@ export default function HomeSketch() {
   });
 
   return <>
-    {/*<OrbitControls makeDefault={true} />*/}
     <ambientLight intensity={1.0} />
 
     <Environment preset={'city'} />
-    {/*<color args={['#695656']} attach={'background'} />*/}
-
-    {/*<EffectComposer>*/}
-    {/*  <Glitch*/}
-    {/*    delay={new Vector2(30, 60)} // min and max glitch delay*/}
-    {/*    duration={new Vector2(0.6, 1.0)} // min and max glitch duration*/}
-    {/*    strength={new Vector2(0.3, 1.0)} // min and max glitch strength*/}
-    {/*    mode={GlitchMode.SPORADIC} // glitch mode*/}
-    {/*    active={true} // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)*/}
-    {/*    ratio={1} // Threshold for strong glitches, 0 - no weak glitches, 1 - no strong glitches.*/}
-    {/*  />*/}
-    {/*</EffectComposer>*/}
 
     <PresentationControls
-      global
+      global={false}
       rotation={[0.13, 0.1, 0]}
       polar={[-0.4, 0.2]}
       azimuth={[-1, 0.75]}
@@ -88,13 +65,6 @@ export default function HomeSketch() {
         />
       </Float>
     </PresentationControls>
-
-    <ContactShadows
-      position-y={-1.4}
-      opacity={0.4}
-      scale={5}
-      blur={2.4}
-    />
 
     <mesh position={[0, 0, -10]} scale={5} ref={sphereRef}>
       <sphereGeometry args={[1, 128, 128]} />
