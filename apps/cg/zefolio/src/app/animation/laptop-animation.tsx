@@ -1,20 +1,14 @@
-import { useSpring } from "@react-spring/core";
-import { a } from "@react-spring/three";
+import { useSpring } from '@react-spring/core';
+import { a } from '@react-spring/three';
 import { useState } from 'react';
-
-export enum AnimationType {
-  ZOOM,
-  ZOOM_ROTATE
-}
 
 export default function LaptopAnimation(props: any) {
   const [active, setActive] = useState(0);
-  const { type } = props;
 
   // create a common spring that will be used later to interpolate other values
   const { spring } = useSpring({
     spring: active,
-    config: { mass: 5, tension: 400, friction: 50, precision: 0.0001 },
+    config: { mass: 5, tension: 400, friction: 50, precision: 0.0001 }
   });
 
   // interpolate values from common spring
@@ -30,7 +24,7 @@ export default function LaptopAnimation(props: any) {
       position-y={positionY}
       rotation-x={rotationX}
       rotation-y={rotationY}
-      rotation-z  ={rotationZ}
+      rotation-z={rotationZ}
       onPointerEnter={() => setActive(1)}
       onPointerLeave={() => setActive(0)}
     >

@@ -1,9 +1,16 @@
 // @ts-nocheck
 
-import React, { useRef } from 'react';
-import { Html, useGLTF } from '@react-three/drei';
+import React, { useEffect, useRef, useState } from 'react';
+import { Html, Text, useGLTF } from '@react-three/drei';
 import LaptopAnimation from '../animation/laptop-animation';
+import { BLOG_URL } from '../constants';
+import { useControls } from 'leva';
 
+enum LaptopState {
+  inactive,
+  booting,
+  active
+}
 
 export default function LaptopModel(props) {
   const group = useRef();
@@ -11,10 +18,29 @@ export default function LaptopModel(props) {
     nodes,
     materials
   } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf');
+  const [active, setActive] = useState(LaptopState.inactive);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setActive(LaptopState.booting);
+      setTimeout(() => {
+        setActive(LaptopState.active);
+      }, 1000);
+    }, 750);
+  }, []);
+
+  const textControls = useControls('laptop', {
+    bootTextPos: {
+      x: 0,
+      y: 0.08,
+      z: -1.8
+    }
+  });
+
   return (
     <>
       <group ref={group} {...props} dispose={null}>
-        <LaptopAnimation >
+        <LaptopAnimation>
           <group position={[0, 0.52, 0]} scale={[0.1, 0.1, 0.1]}>
             <mesh geometry={nodes.Circle001.geometry} material={nodes.Circle001.material} />
             <mesh geometry={nodes.Circle001_1.geometry} material={nodes.Circle001_1.material} />
@@ -50,15 +76,27 @@ export default function LaptopModel(props) {
               <mesh geometry={nodes.Circle002_4.geometry} material={materials.DisplayGlass} />
               <mesh geometry={nodes.AppleLogo000.geometry} material={materials['AppleLogo.004']}
                     position={[0, -0.11, -1.8]} rotation={[-Math.PI, 0, -Math.PI]} scale={[0.58, 0.58, 0.58]} />
-              <Html
+              {active === LaptopState.active && <Html
                 transform
                 wrapperClass={'screen-iframe-container'}
                 distanceFactor={2.0}
                 position={[0, -0.05, -1.9]}
                 rotation-x={-Math.PI / 2}
               >
-                <iframe src={'https://blog.paladinze.com/'} />
-              </Html>
+                <iframe src={BLOG_URL} />
+              </Html>}
+              {active === LaptopState.booting &&
+              <Text font='assets/fonts/Bangers-Regular.ttf'
+                    fontSize={0.25}
+                    position-x={textControls.bootTextPos.x}
+                    position-y={textControls.bootTextPos.y}
+                    position-z={textControls.bootTextPos.z}
+                    rotation-x={-Math.PI / 2}
+                    maxWidth={2}
+                    textAlign={'center'}
+              >
+                Booting...
+              </Text>}
             </group>
             <group position={[-15.03, 0.03, 0.6]} scale={5.8}>
               <mesh geometry={nodes.Circle009.geometry} material={nodes.Circle009.material} />
