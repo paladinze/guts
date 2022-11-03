@@ -6,13 +6,23 @@ import { Mesh, ShaderMaterial } from 'three';
 import { useRef } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
-import BoxModel from './components/box-model';
+import { useControls } from 'leva';
 
 export default function HomeSketch() {
 
   const portalMatRef = useRef<ShaderMaterial>(null!);
 
   const sphereRef = useRef<Mesh>(null!);
+
+  const laptopControls = useControls({
+    rotation: {
+      value: {
+        x: 0,
+        y: 0,
+        z: 0
+      }
+    }
+  });
 
   useFrame((state, delta) => {
     // @ts-ignore
@@ -42,7 +52,11 @@ export default function HomeSketch() {
           rotation={[-0.1, Math.PI, 0]}
           position={[0, 0.55, -1.15]}
         />
-        <LaptopModel position-y={-1.2} scale={1.2} />
+        <LaptopModel position-y={-1.2} scale={1.2}
+                     rotation-x={laptopControls.rotation.x}
+                     rotation-z={laptopControls.rotation.z}
+                     rotation-y={laptopControls.rotation.y}
+        />
         <Text
           font='assets/fonts/Bangers-Regular.ttf'
           fontSize={1.5}
