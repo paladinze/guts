@@ -3,14 +3,16 @@ import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Mesh, ShaderMaterial } from 'three';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
 import { useControls } from 'leva';
 import EntryAnimation from './animation/entry-animation';
 import { TITLE_TEXT } from './constants';
+import LaptopAnimation from './animation/laptop-animation';
 
 export default function HomeSketch() {
+  const [floatSpeed, setFloatSpeed] = useState(1);
 
   const portalMatRef = useRef<ShaderMaterial>(null!);
 
@@ -21,7 +23,7 @@ export default function HomeSketch() {
       value: {
         x: 0,
         y: 0,
-        z: 0
+        z: -0.05,
       }
     }
   });
@@ -44,7 +46,7 @@ export default function HomeSketch() {
         config={{ mass: 2, tension: 300 }}
         snap={{ mass: 4, tension: 300 }}
       >
-        <Float rotationIntensity={0.2}>
+        <Float rotationIntensity={0.5} speed={floatSpeed}>
           <rectAreaLight
             width={2.5}
             height={1.65}
@@ -53,11 +55,15 @@ export default function HomeSketch() {
             rotation={[-0.1, Math.PI, 0]}
             position={[0, 0.55, -1.15]}
           />
-          <LaptopModel position-y={-1.2} scale={1.2}
-             rotation-x={laptopControls.rotation.x}
-             rotation-z={laptopControls.rotation.z}
-             rotation-y={laptopControls.rotation.y}
-          />
+          <group position-y={-1.2} scale={1.2}
+                 rotation-x={laptopControls.rotation.x}
+                 rotation-z={laptopControls.rotation.z}
+                 rotation-y={laptopControls.rotation.y}
+          >
+            <LaptopAnimation setFloatSpeed={setFloatSpeed} >
+              <LaptopModel/>
+            </LaptopAnimation>
+          </group>
           <Text
             font='assets/fonts/Bangers-Regular.ttf'
             fontSize={1.5}
