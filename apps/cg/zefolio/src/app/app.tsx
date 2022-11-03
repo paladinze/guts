@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import HomeSketch from './home-sketch';
-import HUD from './components/hud';
+import HUD from './HUD/hud';
 import { Leva } from 'leva';
 import { environment } from '../environments/environment'
 

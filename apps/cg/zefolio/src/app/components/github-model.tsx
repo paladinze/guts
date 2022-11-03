@@ -1,11 +1,13 @@
 import { useGLTF } from '@react-three/drei';
-import ButtonAnimation, { ButtonAnimationType } from '../animation/button-animation';
+import React from 'react';
 
-export default function Model(props: any) {
+export default function GithubModel(props: any) {
   const { scene } = useGLTF('assets/models/github.glb');
   return <group {...props}>
-    <ButtonAnimation type={ButtonAnimationType.ZOOM_ROTATE}>
-      <primitive object={scene} />
-    </ButtonAnimation>
+    <primitive object={scene}
+               scale={15}
+               position={[0, 0, 0]}
+               rotation={[0, -0.35, 0]}
+    />
   </group>;
 }

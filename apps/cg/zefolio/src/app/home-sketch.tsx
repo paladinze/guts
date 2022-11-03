@@ -8,6 +8,7 @@ import './materials/chaos-material';
 import StarModel from './components/star-model';
 import { useControls } from 'leva';
 import EntryAnimation from './animation/entry-animation';
+import { TITLE_TEXT } from './constants';
 
 export default function HomeSketch() {
 
@@ -32,12 +33,8 @@ export default function HomeSketch() {
 
   return <>
     <ambientLight intensity={1.0} />
-
     <Environment preset={'city'} />
-
     <EntryAnimation>
-
-
       <PresentationControls
         enabled={true}
         global={false}
@@ -57,9 +54,9 @@ export default function HomeSketch() {
             position={[0, 0.55, -1.15]}
           />
           <LaptopModel position-y={-1.2} scale={1.2}
-                       rotation-x={laptopControls.rotation.x}
-                       rotation-z={laptopControls.rotation.z}
-                       rotation-y={laptopControls.rotation.y}
+             rotation-x={laptopControls.rotation.x}
+             rotation-z={laptopControls.rotation.z}
+             rotation-y={laptopControls.rotation.y}
           />
           <Text
             font='assets/fonts/Bangers-Regular.ttf'
@@ -67,12 +64,12 @@ export default function HomeSketch() {
             position={[-3.5, 0.75, 0.75]}
             rotation-y={1.3}
             outlineWidth={0.05}
-            outlineColor={'salmon'}
+            outlineColor={'#F67280'}
             outlineOpacity={0.7}
             maxWidth={2}
             textAlign={'center'}
           >
-            Ze Cheng
+            {TITLE_TEXT}
           </Text>
           <Sparkles
             count={15}
