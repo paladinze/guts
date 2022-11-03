@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 export default function LaptopAnimation(props: any) {
   const {setUserControl} = props;
   const [active, setActive] = useState(0);
-  const [locked, setLocked] = useState(false);
 
   // create a common spring that will be used later to interpolate other values
   const { spring } = useSpring({
@@ -28,12 +27,10 @@ export default function LaptopAnimation(props: any) {
       rotation-y={rotationY}
       rotation-z={rotationZ}
       onClick={(event) => {
-        setLocked(true);
         setActive(1);
         setUserControl(false);
       }}
       onPointerMissed={(event) => {
-        setLocked(false);
         setActive(0);
         setUserControl(true);
       }}

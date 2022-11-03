@@ -5,6 +5,7 @@ import { Html, Text, useGLTF } from '@react-three/drei';
 import { BLOG_URL } from '../constants';
 import { useControls } from 'leva';
 import RubyModel from './ruby-model';
+import WizardModel from './wizard-model';
 import { openLink } from '../utils';
 import RubyAnimation from '../animation/ruby-animation';
 
@@ -56,6 +57,7 @@ export default function LaptopModel(props) {
                 position={[-11.79, -0.15, -8.3]} scale={5.8} />
           <mesh geometry={nodes.RubberFoot.geometry} material={materials.DarkRubber} position={[-11.95, -0.75, 7.86]}
                 scale={5.8} />
+          <WizardModel position={[8, 0, 8]} scale={5} />
           <group position={[0.01, -0.21, -10.56]} scale={5.8}>
             <mesh geometry={nodes.Circle012.geometry} material={materials.HingeBlack} />
             <mesh geometry={nodes.Circle012_1.geometry} material={materials.HingeMetal} />
@@ -105,14 +107,6 @@ export default function LaptopModel(props) {
             <group position={[0,3,0]} scale={0.3} rotation={[-Math.PI/ 2, 0, 0]}>
               <RubyAnimation laptopOpened={props.laptopOpened}>
                 <RubyModel  />
-                {/*<Html wrapperClass='sphere-label'*/}
-                {/*      position={[0, 0, 0]}*/}
-                {/*      center*/}
-                {/*      distanceFactor={8} // simulate perspective*/}
-                {/*      // occlude={[cubeRef, groundRef]} // hidden when behind the cube*/}
-                {/*>*/}
-                {/*  <div onClick={() => {alert('ze')}}>A Sphere</div>*/}
-                {/*</Html>*/}
               </RubyAnimation>
             </group>
           </group>
