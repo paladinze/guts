@@ -17,21 +17,21 @@ const modelListData = [
     scale: 200,
     position: [0, 40, 0],
     rotation: [0, -Math.PI * 2 / 7, 0],
-    url: 'https://blog.shaderly.com',
+    url: 'https://blog.shaderly.com'
   },
   {
     Component: PhoneModel,
     scale: [28, 25, 30],
     position: [175, 10, 0],
     rotation: [0.2, -0.5, 0],
-    url: 'http://huoshui.org/',
+    url: 'http://huoshui.org/'
   },
   {
     Component: GithubModel,
     scale: 15,
     position: [350, 40, 0],
     rotation: [0, Math.PI / 0.53, 0],
-    url: 'https://github.com/paladinze',
+    url: 'https://github.com/paladinze'
   }
 ];
 // {/*<HamModel scale={200} position-x={350} rotation-y={Math.PI / 1.5} />*/}
@@ -42,13 +42,26 @@ function ModelList(props: any) {
   return modelListData.map((item, index) => {
     const { Component, scale, position, rotation, url } = item;
 
+    const { gl } = useThree();
+    const canvas = gl.domElement;
+
     const clickHandler = useCallback(() => {
       openLink(url);
+    }, []);
+
+    const pointerEnterHandler = useCallback(() => {
+      canvas.style.cursor = 'pointer';
+    }, []);
+
+    const pointerLeaveHandler = useCallback(() => {
+      canvas.style.cursor = 'default';
     }, []);
 
     return <Component
       key={index} scale={scale} position={position} rotation={rotation}
       onClick={clickHandler}
+      onPointerEnter={pointerEnterHandler}
+      onPointerLeave={pointerLeaveHandler}
     />;
   });
 }
@@ -83,6 +96,7 @@ export default function HUD() {
          @ts-ignore **/}
         <ModelList />
       </group>
+
       <Environment preset={'sunset'} />
       <ambientLight intensity={0.5} />
       <directionalLight intensity={0.5} position={[-10, 10, 5]} />

@@ -6,6 +6,7 @@ import { Mesh, ShaderMaterial } from 'three';
 import { useRef } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
+import BoxModel from './components/box-model';
 
 export default function HomeSketch() {
 
