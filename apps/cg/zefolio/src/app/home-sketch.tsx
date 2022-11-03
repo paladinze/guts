@@ -3,7 +3,7 @@ import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Mesh, ShaderMaterial } from 'three';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
 import { useControls } from 'leva';
@@ -13,6 +13,7 @@ import LaptopAnimation from './animation/laptop-animation';
 
 export default function HomeSketch() {
   const [floatSpeed, setFloatSpeed] = useState(1);
+  const [presentControl, setPresentControl] = useState(false);
 
   const portalMatRef = useRef<ShaderMaterial>(null!);
 
@@ -33,12 +34,17 @@ export default function HomeSketch() {
     portalMatRef.current.uTime += delta * 3;
   });
 
+  const setUserControl = (enable: boolean) => {
+    setFloatSpeed(enable ? 1: 0);
+    setPresentControl(enable);
+  };
+
   return <>
     <ambientLight intensity={1.0} />
     <Environment preset={'city'} />
     <EntryAnimation>
       <PresentationControls
-        enabled={true}
+        enabled={presentControl}
         global={false}
         rotation={[0.13, 0.1, 0]}
         polar={[-0.4, 0.2]}
@@ -60,7 +66,7 @@ export default function HomeSketch() {
                  rotation-z={laptopControls.rotation.z}
                  rotation-y={laptopControls.rotation.y}
           >
-            <LaptopAnimation setFloatSpeed={setFloatSpeed} >
+            <LaptopAnimation setUserControl={setUserControl} >
               <LaptopModel/>
             </LaptopAnimation>
           </group>

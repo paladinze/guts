@@ -2,9 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Html, Text, useGLTF } from '@react-three/drei';
-import LaptopAnimation from '../animation/laptop-animation';
 import { BLOG_URL } from '../constants';
 import { useControls } from 'leva';
+import RubyModel from './ruby-model';
+import { openLink } from '../utils';
+import RubyAnimation from '../animation/ruby-animation';
 
 enum LaptopState {
   inactive,
@@ -81,6 +83,10 @@ export default function LaptopModel(props) {
               distanceFactor={2.0}
               position={[0, -0.05, -1.9]}
               rotation-x={-Math.PI / 2}
+              onClick={() => {
+                console.log('click!!')
+                openLink('https://blog.shaderly.com')
+              }}
             >
               <iframe src={BLOG_URL} />
             </Html>}
@@ -96,6 +102,19 @@ export default function LaptopModel(props) {
             >
               Booting...
             </Text>}
+            <group position={[0,3,0]} scale={0.3} rotation={[-Math.PI/ 2, 0, 0]}>
+              <RubyAnimation laptopOpened={props.laptopOpened}>
+                <RubyModel  />
+                {/*<Html wrapperClass='sphere-label'*/}
+                {/*      position={[0, 0, 0]}*/}
+                {/*      center*/}
+                {/*      distanceFactor={8} // simulate perspective*/}
+                {/*      // occlude={[cubeRef, groundRef]} // hidden when behind the cube*/}
+                {/*>*/}
+                {/*  <div onClick={() => {alert('ze')}}>A Sphere</div>*/}
+                {/*</Html>*/}
+              </RubyAnimation>
+            </group>
           </group>
           <group position={[-15.03, 0.03, 0.6]} scale={5.8}>
             <mesh geometry={nodes.Circle009.geometry} material={nodes.Circle009.material} />

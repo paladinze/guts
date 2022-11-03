@@ -6,11 +6,9 @@ import { useThree } from '@react-three/fiber';
 import React, { useCallback } from 'react';
 import GithubModel from '../components/github-model';
 import { ButtonAnimationType } from '../animation/button-animation';
+import { openLink } from '../utils';
 
-function openLink(url: string) {
-  // @ts-ignore
-  window.open(url, '_blank').focus();
-}
+
 
 const modelListData = [
   {

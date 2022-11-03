@@ -1,9 +1,9 @@
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/three';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function LaptopAnimation(props: any) {
-  const {setFloatSpeed} = props;
+  const {setUserControl} = props;
   const [active, setActive] = useState(0);
   const [locked, setLocked] = useState(false);
 
@@ -30,15 +30,17 @@ export default function LaptopAnimation(props: any) {
       onClick={(event) => {
         setLocked(true);
         setActive(1);
-        setFloatSpeed(0);
+        setUserControl(false);
       }}
       onPointerMissed={(event) => {
         setLocked(false);
         setActive(0);
-        setFloatSpeed(1);
+        setUserControl(true);
       }}
     >
-      {props.children}
+      {React.cloneElement(props.children, {
+        laptopOpened: !!active,
+      })}
     </a.group>
   );
 }
