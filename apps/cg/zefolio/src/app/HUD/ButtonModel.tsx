@@ -6,7 +6,6 @@ function ButtonLabel(props: { label: string }) {
   return <Text font='assets/fonts/Bangers-Regular.ttf'
                fontSize={30.0}
                position-y={-75}
-               maxWidth={2}
                textAlign={'center'}
   >
     {props.label}
