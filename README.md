@@ -48,8 +48,13 @@ npm i -g nx
 
 ### build and run projects
 
-- the common syntax for build, run and other tasks is: `nx run [project-name]`:[target]
-- a list of available projects can be found in `workspace.json`
+- the common syntax for start a project in dev mode: `nx serve [category]-[project-name]`
+  - a list of available projects can be found in `workspace.json`
+  - example: `nx serve cg-zefolio`
+- run custom task: `nx run [category]-[project-name]:[task-name]`
+  - available task names are defined in the `project.json` of each project
+  - example: `nx run cg-zefolio:build`
+
 
 ## Scaffolding
 
