@@ -17,6 +17,7 @@ apps
     └── raycast
     └── physics
     └── model-viewer
+    └── shader-noise: experiment on noises and shaders
     └── r3f-starter: basic rendering features of React Three fiber (R3F)
     └── r3f-model: glTF (with draco) model imports and animation
     └── r3f-text: 3D text with matcap material

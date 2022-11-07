@@ -13,6 +13,7 @@
     "cg-r3f-text": "apps/cg/r3f-text",
     "cg-raycast": "apps/cg/raycast",
     "cg-scroll-animation": "apps/cg/scroll-animation",
+    "cg-shader-noise": "apps/cg/shader-noise",
     "cg-static-cube": "apps/cg/static-cube",
     "cg-zefolio": "apps/cg/zefolio",
     "cg-zefolio-e2e": "apps/cg/zefolio-e2e",

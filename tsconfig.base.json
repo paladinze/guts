@@ -15,6 +15,7 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "@guts/toy/mini-webpack": ["libs/toy/mini-webpack/src/index.ts"]
