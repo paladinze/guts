@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cg/r3f-physics/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cg/r3f-physics",
+        "index": "apps/cg/r3f-physics/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cg/r3f-physics/src/main.tsx",
+        "polyfills": "apps/cg/r3f-physics/src/polyfills.ts",
+        "tsConfig": "apps/cg/r3f-physics/tsconfig.app.json",
+        "assets": [
+          "apps/cg/r3f-physics/src/favicon.ico",
+          "apps/cg/r3f-physics/src/assets"
+        ],
+        "styles": ["apps/cg/r3f-physics/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cg/r3f-physics/src/environments/environment.ts",
+              "with": "apps/cg/r3f-physics/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cg-r3f-physics:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cg-r3f-physics:build:development"
+        },
+        "production": {
+          "buildTarget": "cg-r3f-physics:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cg/r3f-physics/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cg/r3f-physics"],
+      "options": {
+        "jestConfig": "apps/cg/r3f-physics/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
