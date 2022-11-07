@@ -14,8 +14,9 @@ enum Clips {
   WAITING = 'Waiting',
 }
 
+export const WIZARD_MODEL_URL = 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/druid/model.gltf';
 export default function WizardModel(props: any) {
-  const model = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/druid/model.gltf');
+  const model = useGLTF(WIZARD_MODEL_URL);
   const animations = useAnimations(model.animations, model.scene);
 
   useEffect(() => {

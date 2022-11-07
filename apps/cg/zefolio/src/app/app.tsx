@@ -2,9 +2,19 @@ import { Canvas } from '@react-three/fiber';
 import HomeSketch from './home-sketch';
 import HUD from './HUD/hud';
 import { Leva } from 'leva';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { Suspense, useEffect } from 'react';
+import ProgressBar from './loading/progress-bar';
+import { useGLTF } from '@react-three/drei';
+import { WIZARD_MODEL_URL } from './components/wizard-model';
+import { RUBY_MODEL_URL } from './components/ruby-model';
 
 export function App() {
+  useEffect(() => {
+    useGLTF.preload(WIZARD_MODEL_URL);
+    useGLTF.preload(RUBY_MODEL_URL);
+  }, []);
+
   return (
     <div id={'canvas-container'}>
       <Leva hidden={environment.production} />
@@ -17,8 +27,10 @@ export function App() {
           position: [4, 2, 6]
         }}
       >
-        <HomeSketch />
-        <HUD />
+        <Suspense fallback={<ProgressBar />}>
+          <HomeSketch />
+          <HUD />
+        </Suspense>
       </Canvas>
     </div>
   );

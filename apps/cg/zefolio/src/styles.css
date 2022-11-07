@@ -22,3 +22,59 @@ canvas {
   border-radius: 20px;
   background-color: white;
 }
+
+/* Progress bar */
+.loader {
+  top: 50%;
+  width: 0%;
+  height: 5px;
+  display: inline-block;
+  position: relative;
+  background: #FFF;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  animation: animFw 10s linear infinite;
+  transition: width 100ms cubic-bezier(0.51, 0.04, 0.85, 0.35) ;
+}
+.loader::after,
+.loader::before {
+  content: '';
+  width: 10px;
+  height: 1px;
+  background: #FFF;
+  position: absolute;
+  top: 9px;
+  right: -2px;
+  opacity: 0;
+  transform: rotate(-45deg) translateX(0px);
+  box-sizing: border-box;
+  animation: coli1 0.3s linear infinite;
+}
+.loader::before {
+  top: -4px;
+  transform: rotate(45deg);
+  animation: coli2 0.3s linear infinite;
+}
+
+@keyframes coli1 {
+  0% {
+    transform: rotate(-45deg) translateX(0px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotate(-45deg) translateX(-45px);
+    opacity: 0;
+  }
+}
+
+@keyframes coli2 {
+  0% {
+    transform: rotate(45deg) translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) translateX(-45px);
+    opacity: 0.7;
+  }
+}
+

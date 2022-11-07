@@ -86,7 +86,6 @@ export default function LaptopModel(props) {
               position={[0, -0.05, -1.9]}
               rotation-x={-Math.PI / 2}
               onClick={() => {
-                console.log('click!!')
                 openLink('https://blog.shaderly.com')
               }}
             >

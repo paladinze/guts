@@ -4,12 +4,9 @@ import { useEffect, useState } from 'react';
 
 export default function EntryAnimation(props: any) {
   const [active, setActive] = useState(0);
-  const { type } = props;
 
   useEffect(() => {
-    setTimeout(() => {
-      setActive(1);
-    }, 0);
+    setActive(1);
   }, []);
 
   // create a common spring that will be used later to interpolate other values
