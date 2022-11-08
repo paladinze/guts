@@ -24,6 +24,7 @@ apps
     └── r3f-baked-scene: render a baked scene + shader material
     └── r3f-pointer: handle mouse events and cursor style
     └── r3f-postprocess: postprocessing
+    └── r3f-physics: simulation on rigidbody collisions of instanced meshes
     └── zefolio: personal portfolio based on r3f and webgl
 └── cloud # cloud computing
     └── otel-client: JS frontend with OpenTelemetry tracing
