@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Environment, OrbitControls } from '@react-three/drei';
 import { Debug, InstancedRigidBodies, Physics, RigidBody, RigidBodyApi } from '@react-three/rapier';
-import { useMemo, useRef } from 'react';
+import { Suspense, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Quaternion, Vector3 } from 'three';
@@ -33,7 +33,7 @@ export default function Experience() {
         body.applyImpulse({ x: 0, y: 15 * mass, z: 0 });
       });
     }),
-    'more cubes': button(() => {
+    'again!': button(() => {
       allCubes.current.forEach((body, i) => {
         body.setTranslation(new Vector3(...cubeTransforms.positions[i]), true);
         const quaternion = new Quaternion().set(...cubeTransforms.rotations[i], 1);
@@ -97,7 +97,9 @@ export default function Experience() {
 
     <directionalLight castShadow position={[1, 2, 3]} intensity={1.5} />
     <ambientLight intensity={0.5} />
-    <Environment preset={'sunset'} />
+    <Suspense>
+      <Environment preset={'sunset'} />
+    </Suspense>
 
     <Physics gravity={physicsControls.antiGravity ? [0, 0.1, 0] : [0, -9.08, 0]}>
 
@@ -145,9 +147,11 @@ export default function Experience() {
         </mesh>
       </RigidBody>
 
-      <RigidBody position={[0, 5, 0]} rotation={[0, Math.PI * 4 / 5, 0]} mass={1}>
-        <HamModel scale={3} />
-      </RigidBody>
+      <Suspense>
+        <RigidBody position={[0, 5, 0]} rotation={[0, Math.PI * 4 / 5, 0]} mass={1}>
+          <HamModel scale={3} />
+        </RigidBody>
+      </Suspense>
 
       {invisibleWall && <InvisibleWall />}
 
