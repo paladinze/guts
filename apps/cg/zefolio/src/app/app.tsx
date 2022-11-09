@@ -6,8 +6,8 @@ import { environment } from '../environments/environment';
 import { Suspense, useEffect } from 'react';
 import ProgressBar from './loading/progress-bar';
 import { useGLTF } from '@react-three/drei';
-import { WIZARD_MODEL_URL } from './components/wizard-model';
-import { RUBY_MODEL_URL } from './components/ruby-model';
+import { WIZARD_MODEL_URL } from './components/models/wizard-model';
+import { RUBY_MODEL_URL } from './components/models/ruby-model';
 
 export function App() {
   useEffect(() => {

@@ -1,10 +1,10 @@
 import { Environment, Float, PresentationControls, Text } from '@react-three/drei';
-import LaptopModel from './components/laptop-model';
+import LaptopModel from './components/models/laptop-model';
 import { useFrame } from '@react-three/fiber';
 import { Mesh, ShaderMaterial } from 'three';
 import { useRef, useState } from 'react';
 import './materials/chaos-material';
-import StarModel from './components/star-model';
+import StarModel from './components/models/star-model';
 import { useControls } from 'leva';
 import EntryAnimation from './animation/entry-animation';
 import { TITLE_TEXT, TITLE_TEXT_COLOR } from './constants';

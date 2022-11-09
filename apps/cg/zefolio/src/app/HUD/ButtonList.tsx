@@ -1,10 +1,10 @@
 import ButtonModal from './ButtonModel';
-import BookModel from '../components/book-model';
-import PhoneModel from '../components/phone-model';
+import BookModel from '../components/models/book-model';
+import PhoneModel from '../components/models/phone-model';
 
 import { useThree } from '@react-three/fiber';
 import React, { useCallback } from 'react';
-import GithubModel from '../components/github-model';
+import GithubModel from '../components/models/github-model';
 import { ButtonAnimationType } from '../animation/button-animation';
 import { openLink } from '../utils';
 

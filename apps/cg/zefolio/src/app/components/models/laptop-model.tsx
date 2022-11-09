@@ -2,12 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Html, Text, useGLTF } from '@react-three/drei';
-import { BLOG_URL } from '../constants';
+import { BLOG_URL } from '../../constants';
 import { useControls } from 'leva';
 import RubyModel from './ruby-model';
 import WizardModel from './wizard-model';
-import { openLink } from '../utils';
-import RubyAnimation from '../animation/ruby-animation';
+import { openLink } from '../../utils';
+import RubyAnimation from '../../animation/ruby-animation';
 
 enum LaptopState {
   inactive,
