@@ -6,6 +6,7 @@ export const TITLE_TEXT = 'ZE CHENG';
 export const TITLE_TEXT_COLOR = '#F67280';
 export const SPHERE_SHADER_COLOR_START = '#C06C84';
 export const SPHERE_SHADER_COLOR_END = '#6C5B7B';
+export const ROPE_COLOR = '#ff2063';
 
 // export const TITLE_TEXT_COLOR = '#46CDCF';
 // export const SPHERE_SHADER_COLOR_START = '#3D84A8';

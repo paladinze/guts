@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { extend, ReactThreeFiber } from '@react-three/fiber';
 import { SPHERE_SHADER_COLOR_END, SPHERE_SHADER_COLOR_START } from '../constants';
 
-const PortalMaterial = shaderMaterial(
+const ChaosMaterial = shaderMaterial(
   {
     uTime: 0,
     uColorStart: new THREE.Color(SPHERE_SHADER_COLOR_START),
@@ -16,14 +16,14 @@ const PortalMaterial = shaderMaterial(
   portalFragmentShader
 );
 
-extend({ PortalMaterial });
+extend({ ChaosMaterial: ChaosMaterial });
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'portalMaterial': ReactThreeFiber.Object3DNode<ShaderMaterial, typeof PortalMaterial>;
+      'chaosMaterial': ReactThreeFiber.Object3DNode<ShaderMaterial, typeof ChaosMaterial>;
     }
   }
 }
 
-export default PortalMaterial;
+export default ChaosMaterial;

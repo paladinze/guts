@@ -1,23 +1,29 @@
-import { Environment, Float, PresentationControls, Text } from '@react-three/drei';
+import { Environment, Float, OrbitControls, PresentationControls, Text } from '@react-three/drei';
 import LaptopModel from './components/models/laptop-model';
 import { useFrame } from '@react-three/fiber';
-import { Mesh, ShaderMaterial } from 'three';
+import { Group, Mesh, ShaderMaterial, Vector3 } from 'three';
 import { useRef, useState } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/models/star-model';
 import { useControls } from 'leva';
 import EntryAnimation from './animation/entry-animation';
-import { TITLE_TEXT, TITLE_TEXT_COLOR } from './constants';
+import { ROPE_COLOR, TITLE_TEXT, TITLE_TEXT_COLOR } from './constants';
 import LaptopAnimation from './animation/laptop-animation';
 import StarField from './components/background/StarField';
+import HomeTitle from './components/text/home-title';
+import Rope from './components/rope';
 
 export default function HomeSketch() {
   const [floatSpeed, setFloatSpeed] = useState(1);
   const [presentControl, setPresentControl] = useState(false);
 
-  const portalMatRef = useRef<ShaderMaterial>(null!);
+  const sphereMatRef = useRef<ShaderMaterial>(null!);
 
   const sphereRef = useRef<Mesh>(null!);
+
+  const titleRef = useRef<Text>(null!);
+
+  let endPos = new Vector3();
 
   const laptopControls = useControls('laptop', {
     rotation: {
@@ -29,9 +35,39 @@ export default function HomeSketch() {
     }
   });
 
+  const { orbit } = useControls('camera', {
+    orbit: false
+  });
+  const { anchor, mid, endOffset } = useControls('rope', {
+    anchor: {
+      value: {
+        'x': -30, 'y': 11, 'z': -10
+      },
+      step: 1
+    },
+    mid: {
+      value: {
+        'x': -30, 'y': -2, 'z': -10
+      },
+      step: 1
+    },
+    endOffset: {
+      value: {
+        'x': -0.2, 'y': 0.4, 'z': 0
+      },
+      step: 0.2
+    }
+  });
+  const anchorPos = new Vector3(...Object.values(anchor));
+  const midPos = new Vector3(...Object.values(mid));
+
   useFrame((state, delta) => {
     // @ts-ignore
-    portalMatRef.current.uTime += delta * 3;
+    const titleWorldPos = titleRef.current.localToWorld(new Vector3(0, 0, 0));
+    endPos.copy(titleWorldPos.add(new Vector3(...Object.values(endOffset))) );
+
+    // @ts-ignore
+    sphereMatRef.current.uTime += delta * 3;
   });
 
   const setUserControl = (enable: boolean) => {
@@ -43,7 +79,9 @@ export default function HomeSketch() {
     <ambientLight intensity={1.0} />
     <Environment preset={'city'} />
     <StarField />
+    {orbit && <OrbitControls makeDefault={true} />}
 
+    <Rope startPos={anchorPos} endPos={endPos} midPos={midPos} color={ROPE_COLOR}/>
     <EntryAnimation>
       <PresentationControls
         enabled={presentControl}
@@ -72,19 +110,9 @@ export default function HomeSketch() {
               <LaptopModel />
             </LaptopAnimation>
           </group>
-          <Text
-            font='assets/fonts/Bangers-Regular.ttf'
-            fontSize={1.5}
-            position={[-3.5, 0.75, 0.75]}
-            rotation-y={1.3}
-            outlineWidth={0.05}
-            outlineColor={TITLE_TEXT_COLOR}
-            outlineOpacity={0.7}
-            maxWidth={2}
-            textAlign={'center'}
-          >
-            {TITLE_TEXT}
-          </Text>
+          {/*
+          @ts-ignore */}
+          <HomeTitle ref={titleRef} outlineColor={TITLE_TEXT_COLOR} text={TITLE_TEXT} />
           {/*<Sparkles*/}
           {/*  count={15}*/}
           {/*  size={3}*/}
@@ -99,7 +127,7 @@ export default function HomeSketch() {
     </EntryAnimation>
     <mesh position={[0, 0, -10]} scale={5} ref={sphereRef}>
       <sphereGeometry args={[1, 128, 128]} />
-      <portalMaterial ref={portalMatRef} />
+      <chaosMaterial ref={sphereMatRef} />
     </mesh>
 
     <StarModel />
