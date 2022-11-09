@@ -1,15 +1,15 @@
-import { Environment, Float, PresentationControls, Sparkles, Text } from '@react-three/drei';
+import { Environment, Float, PresentationControls, Text } from '@react-three/drei';
 import LaptopModel from './components/laptop-model';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 import { Mesh, ShaderMaterial } from 'three';
-import { Suspense, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './materials/chaos-material';
 import StarModel from './components/star-model';
 import { useControls } from 'leva';
 import EntryAnimation from './animation/entry-animation';
 import { TITLE_TEXT, TITLE_TEXT_COLOR } from './constants';
 import LaptopAnimation from './animation/laptop-animation';
+import StarField from './components/background/StarField';
 
 export default function HomeSketch() {
   const [floatSpeed, setFloatSpeed] = useState(1);
@@ -42,6 +42,8 @@ export default function HomeSketch() {
   return <>
     <ambientLight intensity={1.0} />
     <Environment preset={'city'} />
+    <StarField />
+
     <EntryAnimation>
       <PresentationControls
         enabled={presentControl}
@@ -83,15 +85,15 @@ export default function HomeSketch() {
           >
             {TITLE_TEXT}
           </Text>
-          <Sparkles
-            count={15}
-            size={3}
-            scale={[4, 3, 3]}
-            position={[-3.5, 0.75, 0.75]}
-            speed={0.1}
-            color={new THREE.Color('gold')}
-            opacity={0.75}
-          />
+          {/*<Sparkles*/}
+          {/*  count={15}*/}
+          {/*  size={3}*/}
+          {/*  scale={[4, 3, 3]}*/}
+          {/*  position={[-3.5, 0.75, 0.75]}*/}
+          {/*  speed={0.1}*/}
+          {/*  color={new THREE.Color('gold')}*/}
+          {/*  opacity={0.75}*/}
+          {/*/>*/}
         </Float>
       </PresentationControls>
     </EntryAnimation>
