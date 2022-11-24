@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/toy/map-markers/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/toy/map-markers",
+        "index": "apps/toy/map-markers/src/index.html",
+        "baseHref": "/",
+        "main": "apps/toy/map-markers/src/main.tsx",
+        "polyfills": "apps/toy/map-markers/src/polyfills.ts",
+        "tsConfig": "apps/toy/map-markers/tsconfig.app.json",
+        "assets": [
+          "apps/toy/map-markers/src/favicon.ico",
+          "apps/toy/map-markers/src/assets"
+        ],
+        "styles": ["apps/toy/map-markers/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/toy/map-markers/src/environments/environment.ts",
+              "with": "apps/toy/map-markers/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "toy-map-markers:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "toy-map-markers:build:development"
+        },
+        "production": {
+          "buildTarget": "toy-map-markers:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/toy/map-markers/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/toy/map-markers"],
+      "options": {
+        "jestConfig": "apps/toy/map-markers/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

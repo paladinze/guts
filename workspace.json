@@ -21,6 +21,7 @@
     "cloud-otel-client": "apps/cloud/otel-client",
     "toy-block-editor": "apps/toy/block-editor",
     "toy-google-doc": "apps/toy/google-doc",
+    "toy-map-markers": "apps/toy/map-markers",
     "toy-mini-webpack": "libs/toy/mini-webpack",
     "toy-websocket-server": "apps/toy/websocket-server"
   }
