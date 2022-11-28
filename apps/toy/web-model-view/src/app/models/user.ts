@@ -2,6 +2,7 @@ import { Model } from './model';
 import { Attributes } from './attributes';
 import { Sync } from './sync';
 import { Events } from './events';
+import { Collection } from './collection';
 
 export interface UserProps {
   id: number;
@@ -17,6 +18,10 @@ export class User extends Model<UserProps> {
       new Events(),
       new Sync<UserProps>('http://localhost:3000/users')
     );
+  }
+
+  static buildUserCollection() {
+    return new Collection('http://localhost:3000/users', User.buildInstance);
   }
 
 }

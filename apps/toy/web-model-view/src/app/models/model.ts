@@ -1,7 +1,7 @@
 
 export type Callback = () => void;
 
-interface HasId {
+export interface HasId {
   id: number
 }
 
