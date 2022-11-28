@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/two/canvas-basics/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/two/canvas-basics",
+        "index": "apps/two/canvas-basics/src/index.html",
+        "baseHref": "/",
+        "main": "apps/two/canvas-basics/src/main.tsx",
+        "polyfills": "apps/two/canvas-basics/src/polyfills.ts",
+        "tsConfig": "apps/two/canvas-basics/tsconfig.app.json",
+        "assets": [
+          "apps/two/canvas-basics/src/favicon.ico",
+          "apps/two/canvas-basics/src/assets"
+        ],
+        "styles": ["apps/two/canvas-basics/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/two/canvas-basics/src/environments/environment.ts",
+              "with": "apps/two/canvas-basics/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "two-canvas-basics:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "two-canvas-basics:build:development"
+        },
+        "production": {
+          "buildTarget": "two-canvas-basics:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/two/canvas-basics/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/two/canvas-basics"],
+      "options": {
+        "jestConfig": "apps/two/canvas-basics/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
