@@ -32,7 +32,85 @@ window.onload = function() {
   drawRectangle(ctx);
   drawCircle(ctx);
   drawPolygon(ctx, Math.PI / 10, 5);
+
+  // text
+  drawText(ctx);
+
+  // image
+  drawImg(ctx);
+  drawSprite(ctx);
+
+  // filter
+  const greyFilterButton = document.getElementById('grey-button') as HTMLButtonElement;
+  let toggle: any;
+  setTimeout(() => {
+    toggle = greyscaleFilter(ctx, canvas);
+  }, 1000);
+  greyFilterButton.addEventListener('click', () => {
+    toggle();
+  })
+
+
 };
+
+function greyscaleFilter(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+  let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+  const originalData = [...imageData.data];
+  const { data } = imageData;
+  let isGreyscale = false;
+
+  return () => {
+    if (!isGreyscale) {
+      for (let i=0; i<data.length; i+=4) {
+        const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+        data[i] = avg;
+        data[i+1] = avg;
+        data[i+2] = avg;
+      }
+      ctx.putImageData(imageData, 0, 0, 0, 0, canvas.width, canvas.height);
+    } else {
+      for (let i=0; i<data.length; i+=4) {
+        data[i] = originalData[i];
+        data[i+1] = originalData[i+1];
+        data[i+2] = originalData[i+2];
+      }
+      ctx.putImageData(imageData, 0, 0, 0, 0, canvas.width, canvas.height);
+    }
+    isGreyscale = !isGreyscale;
+  }
+
+}
+
+function drawSprite(ctx: CanvasRenderingContext2D) {
+  const img = document.createElement('img') as HTMLImageElement;
+  img.src = '/assets/pokemons.png';
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, 200, 200, 900, 50, 100, 100)
+    ctx.drawImage(img, 200 * 3, 0, 200, 200, 1000, 50, 100, 100)
+    ctx.drawImage(img, 200 * 2, 0, 200, 200, 1100, 50, 100, 100)
+  }
+}
+
+function drawImg(ctx: CanvasRenderingContext2D) {
+  const img = document.createElement('img') as HTMLImageElement;
+  img.src = '/assets/ghost.jpeg';
+  img.onload = () => {
+    const { naturalWidth, naturalHeight } = img;
+    const aspect = naturalWidth / naturalHeight;
+    const width = 250;
+    const height = width / aspect;
+    ctx.drawImage(img, 600, 50, width, height)
+  }
+}
+
+function drawText(ctx: CanvasRenderingContext2D) {
+  ctx.strokeStyle = 'black';
+  ctx.fillStyle = 'salmon';
+  ctx.font = 'normal bold 45px fantasy';
+  ctx.lineWidth = 1;
+  // ctx.strokeText('SHAPES CARNIVAL', 600 - 150, 570);
+  ctx.fillText('SHAPES CARNIVAL', 600 - 200, 575);
+}
 
 function drawPolygon(ctx: CanvasRenderingContext2D, startAngle: number = 0, edgeCount = 5) {
   const cx = 600;
