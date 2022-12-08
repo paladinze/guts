@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/two/canvas-events/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/two/canvas-events",
+        "index": "apps/two/canvas-events/src/index.html",
+        "baseHref": "/",
+        "main": "apps/two/canvas-events/src/main.tsx",
+        "polyfills": "apps/two/canvas-events/src/polyfills.ts",
+        "tsConfig": "apps/two/canvas-events/tsconfig.app.json",
+        "assets": [
+          "apps/two/canvas-events/src/favicon.ico",
+          "apps/two/canvas-events/src/assets"
+        ],
+        "styles": ["apps/two/canvas-events/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/two/canvas-events/src/environments/environment.ts",
+              "with": "apps/two/canvas-events/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "two-canvas-events:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "two-canvas-events:build:development"
+        },
+        "production": {
+          "buildTarget": "two-canvas-events:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/two/canvas-events/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/two/canvas-events"],
+      "options": {
+        "jestConfig": "apps/two/canvas-events/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

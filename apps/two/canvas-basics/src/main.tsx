@@ -31,10 +31,12 @@ window.onload = function() {
   // shapes
   drawRectangle(ctx);
   drawCircle(ctx);
+  drawWithScale(ctx);
   drawPolygon(ctx, Math.PI / 10, 5);
 
   // text
   drawText(ctx);
+
 
   // image
   drawImg(ctx);
@@ -48,47 +50,71 @@ window.onload = function() {
   }, 1000);
   greyFilterButton.addEventListener('click', () => {
     toggle();
-  })
+  });
 
 
 };
 
+
 function greyscaleFilter(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-  let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+  let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const originalData = [...imageData.data];
   const { data } = imageData;
   let isGreyscale = false;
 
   return () => {
     if (!isGreyscale) {
-      for (let i=0; i<data.length; i+=4) {
-        const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+      for (let i = 0; i < data.length; i += 4) {
+        const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
         data[i] = avg;
-        data[i+1] = avg;
-        data[i+2] = avg;
+        data[i + 1] = avg;
+        data[i + 2] = avg;
       }
       ctx.putImageData(imageData, 0, 0, 0, 0, canvas.width, canvas.height);
     } else {
-      for (let i=0; i<data.length; i+=4) {
+      for (let i = 0; i < data.length; i += 4) {
         data[i] = originalData[i];
-        data[i+1] = originalData[i+1];
-        data[i+2] = originalData[i+2];
+        data[i + 1] = originalData[i + 1];
+        data[i + 2] = originalData[i + 2];
       }
       ctx.putImageData(imageData, 0, 0, 0, 0, canvas.width, canvas.height);
     }
     isGreyscale = !isGreyscale;
-  }
+  };
 
 }
+
+function drawWithScale(ctx: CanvasRenderingContext2D) {
+  ctx.save();
+  ctx.beginPath();
+  // ctx.scale(2, 2);
+  ctx.transform(2, 0, 0, 2, 0, 0);
+  ctx.strokeStyle = 'blue';
+  ctx.strokeRect(350, 100, 50, 50);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(425, 100);
+  ctx.rotate(45 / 180 * Math.PI);
+  ctx.translate(-425, -100);
+  ctx.scale(2, 2);
+  ctx.strokeStyle = 'blue';
+  ctx.strokeRect(400, 150, 50, 50);
+  ctx.stroke();
+  ctx.restore();
+}
+
 
 function drawSprite(ctx: CanvasRenderingContext2D) {
   const img = document.createElement('img') as HTMLImageElement;
   img.src = '/assets/pokemons.png';
   img.onload = () => {
-    ctx.drawImage(img, 0, 0, 200, 200, 900, 50, 100, 100)
-    ctx.drawImage(img, 200 * 3, 0, 200, 200, 1000, 50, 100, 100)
-    ctx.drawImage(img, 200 * 2, 0, 200, 200, 1100, 50, 100, 100)
-  }
+    ctx.drawImage(img, 0, 0, 200, 200, 900, 50, 100, 100);
+    ctx.drawImage(img, 200 * 3, 0, 200, 200, 1000, 50, 100, 100);
+    ctx.drawImage(img, 200 * 2, 0, 200, 200, 1100, 50, 100, 100);
+  };
 }
 
 function drawImg(ctx: CanvasRenderingContext2D) {
@@ -99,8 +125,8 @@ function drawImg(ctx: CanvasRenderingContext2D) {
     const aspect = naturalWidth / naturalHeight;
     const width = 250;
     const height = width / aspect;
-    ctx.drawImage(img, 600, 50, width, height)
-  }
+    ctx.drawImage(img, 600, 50, width, height);
+  };
 }
 
 function drawText(ctx: CanvasRenderingContext2D) {
@@ -149,6 +175,7 @@ function drawCircle(ctx: CanvasRenderingContext2D) {
 }
 
 function drawRectangle(ctx: CanvasRenderingContext2D) {
+  ctx.save();
   ctx.beginPath();
   ctx.lineWidth = 20;
   ctx.strokeStyle = 'Teal';
@@ -157,6 +184,7 @@ function drawRectangle(ctx: CanvasRenderingContext2D) {
   ctx.rect(500, 100, 50, 50);
   ctx.stroke();
   ctx.fill();
+  ctx.restore();
 }
 
 function drawBezierCurve(ctx: CanvasRenderingContext2D) {
