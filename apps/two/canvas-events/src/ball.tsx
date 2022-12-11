@@ -6,6 +6,7 @@ export default class Ball {
    ctx;
    dx;
    dy;
+  fillStyle: string;
 
   constructor(cx: number, cy:number, r:number, ctx: CanvasRenderingContext2D) {
     this.cx = cx;
@@ -14,11 +15,12 @@ export default class Ball {
     this.ctx = ctx;
     this.dx = 0;
     this.dy = 0;
+    this.fillStyle = 'red';
   }
 
   draw = () => {
     this.ctx.beginPath();
-    this.ctx.fillStyle = 'red';
+    this.ctx.fillStyle = this.fillStyle;
     this.ctx.arc(this.cx, this.cy, this.r, 0, Math.PI * 2);
     this.ctx.fill();
   }
