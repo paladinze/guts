@@ -29,6 +29,7 @@
     "toy-web-model-view": "apps/toy/web-model-view",
     "toy-websocket-server": "apps/toy/websocket-server",
     "two-canvas-basics": "apps/two/canvas-basics",
-    "two-canvas-events": "apps/two/canvas-events"
+    "two-canvas-events": "apps/two/canvas-events",
+    "two-canvas-paints": "apps/two/canvas-paints"
   }
 }
