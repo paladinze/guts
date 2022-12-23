@@ -11,6 +11,12 @@ apps
     └── google-doc
     └── block-editor
     └── websocket-server
+└── css # CSS processors demo & mockups
+    └── sass-demo: demo of SASS preprocessor
+└── two # canvas based drawing
+    └── canvas-basic: demo of basic 2D drawing API
+    └── canvas-events: drawing API + mouse events
+    └── canvas-paints: drawing API + pixel-based painting      
 └── cg # computer graphics demo (mostly based on WebGL & Three.js)
     └── static-cube
     └── particles
