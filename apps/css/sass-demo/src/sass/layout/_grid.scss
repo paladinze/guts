@@ -1,0 +1,51 @@
+@import "../../sass/abstracts/mixins";
+
+$grid-width: 114rem;
+$gutter-vertical: 4rem;
+$gutter-horizontal: 4rem;
+
+.row {
+  font-size: 16px;
+  max-width: $grid-width;
+  margin: 0 auto;
+  //background-color: #eee;
+
+  [class^="col"] {
+    float: left;
+    //background-color: salmon;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - #{$gutter-horizontal} * 2) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc((100% - #{$gutter-horizontal} * 2) * 2 / 3 + #{$gutter-horizontal});
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - #{$gutter-horizontal} * 3) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc((100% - #{$gutter-horizontal} * 3) * 2 / 4 + #{$gutter-horizontal});
+  }
+
+  .col-3-of-4 {
+    width: calc((100% - #{$gutter-horizontal} * 3) * 3 / 4 + #{$gutter-horizontal} * 2);
+  }
+
+  @include clearfix;
+}
