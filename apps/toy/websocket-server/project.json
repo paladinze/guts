@@ -1,4 +1,5 @@
 {
+  "name": "toy-websocket-server",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/toy/websocket-server/src",
   "projectType": "application",
@@ -46,7 +47,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/toy/websocket-server"],
+      "outputs": ["{workspaceRoot}/coverage/apps/toy/websocket-server"],
       "options": {
         "jestConfig": "apps/toy/websocket-server/jest.config.ts",
         "passWithNoTests": true

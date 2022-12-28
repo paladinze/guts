@@ -1,10 +1,11 @@
 {
+  "name": "css-sass-demo",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/css/sass-demo/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "css-sass-demo:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/css/sass-demo"],
+      "outputs": ["{workspaceRoot}/coverage/apps/css/sass-demo"],
       "options": {
         "jestConfig": "apps/css/sass-demo/jest.config.ts",
         "passWithNoTests": true

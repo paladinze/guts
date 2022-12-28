@@ -1,10 +1,11 @@
 {
+  "name": "cg-static-cube",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/cg/static-cube/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cg-static-cube:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/cg/static-cube"],
+      "outputs": ["{workspaceRoot}/coverage/apps/cg/static-cube"],
       "options": {
         "jestConfig": "apps/cg/static-cube/jest.config.ts",
         "passWithNoTests": true

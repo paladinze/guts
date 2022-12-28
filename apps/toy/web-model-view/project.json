@@ -1,10 +1,11 @@
 {
+  "name": "toy-web-model-view",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/toy/web-model-view/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "toy-web-model-view:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/toy/web-model-view"],
+      "outputs": ["{workspaceRoot}/coverage/apps/toy/web-model-view"],
       "options": {
         "jestConfig": "apps/toy/web-model-view/jest.config.ts",
         "passWithNoTests": true

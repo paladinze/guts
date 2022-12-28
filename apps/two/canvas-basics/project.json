@@ -1,10 +1,11 @@
 {
+  "name": "two-canvas-basics",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/two/canvas-basics/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "two-canvas-basics:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/two/canvas-basics"],
+      "outputs": ["{workspaceRoot}/coverage/apps/two/canvas-basics"],
       "options": {
         "jestConfig": "apps/two/canvas-basics/jest.config.ts",
         "passWithNoTests": true

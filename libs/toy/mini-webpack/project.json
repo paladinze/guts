@@ -1,4 +1,5 @@
 {
+  "name": "toy-mini-webpack",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/toy/mini-webpack/src",
   "projectType": "library",

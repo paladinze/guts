@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import Grid from './components/grid';
 import Akira from './screens/akira';
+import Dashboard from './screens/dashboard';
 import './styles.scss';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +10,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <Akira />
+    {/*<Akira />*/}
+    <Dashboard />
     {/*<Grid />*/}
   </StrictMode>
 );

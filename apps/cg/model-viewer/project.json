@@ -1,10 +1,11 @@
 {
+  "name": "cg-model-viewer",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/cg/model-viewer/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cg-model-viewer:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/cg/model-viewer"],
+      "outputs": ["{workspaceRoot}/coverage/apps/cg/model-viewer"],
       "options": {
         "jestConfig": "apps/cg/model-viewer/jest.config.ts",
         "passWithNoTests": true

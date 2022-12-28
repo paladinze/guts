@@ -1,10 +1,11 @@
 {
+  "name": "toy-google-doc",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/toy/google-doc/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "toy-google-doc:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/toy/google-doc"],
+      "outputs": ["{workspaceRoot}/coverage/apps/toy/google-doc"],
       "options": {
         "jestConfig": "apps/toy/google-doc/jest.config.ts",
         "passWithNoTests": true

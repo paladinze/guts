@@ -1,10 +1,11 @@
 {
+  "name": "cg-r3f-pointer",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/cg/r3f-pointer/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -47,7 +48,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cg-r3f-pointer:build",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/cg/r3f-pointer"],
+      "outputs": ["{workspaceRoot}/coverage/apps/cg/r3f-pointer"],
       "options": {
         "jestConfig": "apps/cg/r3f-pointer/jest.config.ts",
         "passWithNoTests": true

@@ -20,7 +20,7 @@
     "cloud-otel-client": "apps/cloud/otel-client",
     "css-sass-demo": "apps/css/sass-demo",
     "state-redux": "apps/state/redux",
-    "state-redux-e2e": "apps/state/redux-e2e",
+    "state-rxjs": "apps/state/rxjs",
     "toy-block-editor": "apps/toy/block-editor",
     "toy-carousel": "apps/toy/carousel",
     "toy-google-doc": "apps/toy/google-doc",
