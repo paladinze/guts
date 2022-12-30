@@ -18,6 +18,7 @@
     "cg-static-cube": "apps/cg/static-cube",
     "cg-zefolio": "apps/cg/zefolio",
     "cloud-otel-client": "apps/cloud/otel-client",
+    "css-emotion": "apps/css/emotion",
     "css-sass-demo": "apps/css/sass-demo",
     "state-redux": "apps/state/redux",
     "state-rxjs": "apps/state/rxjs",
@@ -31,5 +32,6 @@
     "two-canvas-basics": "apps/two/canvas-basics",
     "two-canvas-events": "apps/two/canvas-events",
     "two-canvas-paints": "apps/two/canvas-paints"
-  }
+  },
+  "defaultProject": "toy-google-doc"
 }

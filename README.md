@@ -13,6 +13,7 @@ apps
     └── websocket-server
 └── css # CSS processors demo & mockups
     └── sass-demo: demo of SASS preprocessor
+    └── emotion: demo of emotion style-in-js solution
 └── two # canvas based drawing
     └── canvas-basic: demo of basic 2D drawing API
     └── canvas-events: drawing API + mouse events
