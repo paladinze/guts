@@ -27,6 +27,7 @@
     "toy-google-doc": "apps/toy/google-doc",
     "toy-map-markers": "apps/toy/map-markers",
     "toy-mini-webpack": "libs/toy/mini-webpack",
+    "toy-web-component": "apps/toy/web-component",
     "toy-web-model-view": "apps/toy/web-model-view",
     "toy-websocket-server": "apps/toy/websocket-server",
     "two-canvas-basics": "apps/two/canvas-basics",
