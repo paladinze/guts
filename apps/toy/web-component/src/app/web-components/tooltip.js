@@ -4,15 +4,29 @@ class Tooltip extends HTMLElement {
     super();
     this._tooltipContainer = null;
     this.attachShadow({ mode: 'open' });
+
+    const tipTmpl = document.querySelector('#tooltip-tmpl');
+    console.log(tipTmpl);
+    window.tmp = tipTmpl;
+    // load shadowDom from external template
+    // this.shadowRoot.append(tipTmpl.content.cloneNode(true));
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        span {
+          color: salmon
+        }
+      </style>
+        <span>
+          <span>*</span><slot>default text</slot>
+        </span>
+    `;
   }
 
   connectedCallback() {
     this.style.position = 'relative';
     this._tipText = this.getAttribute('text') ?? 'some tip';
 
-    const span = document.createElement('span');
-    span.textContent = '*';
-    this.shadowRoot.appendChild(span);
     this.addEventListener('mouseenter', this._addTooltip.bind(this));
     this.addEventListener('mouseleave', this._removeTooltip.bind(this));
   }
@@ -24,6 +38,7 @@ class Tooltip extends HTMLElement {
     this._tooltipContainer.style.color = 'white';
     this._tooltipContainer.style.position = 'absolute';
     this._tooltipContainer.style.padding = '25px 45px';
+    this._tooltipContainer.style.zIndex = '10';
 
     this.shadowRoot.appendChild(this._tooltipContainer);
   }

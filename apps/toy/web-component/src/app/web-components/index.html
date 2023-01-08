@@ -6,14 +6,36 @@
         content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>Document</title>
-  <script src='./tooltip.js'></script>
+  <script src='./tooltip.js' defer></script>
+  <script src='./time.js' defer></script>
   <style>
     div {
-      border: 1px solid salmon;
+      /*border: 1px solid salmon;*/
     }
   </style>
 </head>
 <body>
-  <ze-tooltip text='foo tip'>Ze Cheng</ze-tooltip> is awesome!
+<template id='tooltip-tmpl'>
+  <style>
+    span {
+      color: salmon;
+    }
+  </style>
+  <span>*<slot>some default text</slot></span>
+</template>
+<h1>Web Component</h1>
+  <h2>tooltip</h2>
+  <div>
+    <ze-tooltip text='the tooltip'></ze-tooltip>is awesome!
+  </div>
+
+  <div>
+    <ze-tooltip text='the tooltip'>text with a tooltip</ze-tooltip> is awesome!
+  </div>
+
+
+  <h2>formatted time</h2>
+  <time-formatted id="elem" hour="numeric" minute="numeric" second="numeric"></time-formatted>
+
 </body>
 </html>
