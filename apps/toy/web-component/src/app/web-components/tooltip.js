@@ -13,13 +13,27 @@ class Tooltip extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
-        span {
-          color: salmon
+        :host(.active) {
+          background: salmon;
+        }
+
+        :host(*) {
+          background: var(--color-primary, wheat);
+        }
+
+        :host-context(.special-div) {
+          background: dodgerblue;
+        }
+
+        ::slotted(*) {
+          color: black;
+          border-bottom: 3px dashed grey;
         }
       </style>
-        <span>
-          <span>*</span><slot>default text</slot>
-        </span>
+      <span>
+        <span>*</span>
+        <slot><span>default text</span></slot>
+      </span>
     `;
   }
 

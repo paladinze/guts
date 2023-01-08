@@ -6,11 +6,19 @@
         content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>Document</title>
-  <script src='./tooltip.js' defer></script>
-  <script src='./time.js' defer></script>
+  <script src='tooltip.js' defer></script>
+  <script src='time.js' defer></script>
+  <script src='superA.js' defer></script>
   <style>
+    /* some global styles */
+    :root {
+      --color-primary: hotpink;
+    }
+    * {
+      box-sizing: border-box;
+    }
     div {
-      /*border: 1px solid salmon;*/
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -26,16 +34,23 @@
 <h1>Web Component</h1>
   <h2>tooltip</h2>
   <div>
-    <ze-tooltip text='the tooltip'></ze-tooltip>is awesome!
+    <ze-tooltip text='the tooltip' class='active'></ze-tooltip>is awesome!
   </div>
 
   <div>
-    <ze-tooltip text='the tooltip'>text with a tooltip</ze-tooltip> is awesome!
+    <ze-tooltip text='the tooltip'><span>text with a tooltip</span></ze-tooltip> is awesome!
+  </div>
+
+  <div class='special-div'>
+    <ze-tooltip text='the tooltip'><span>text with a tooltip</span></ze-tooltip> is awesome!
   </div>
 
 
   <h2>formatted time</h2>
   <time-formatted id="elem" hour="numeric" minute="numeric" second="numeric"></time-formatted>
+
+  <h2>extend built-in tag</h2>
+  <a is="super-a" href='https://google.com'>A Super Link</a>
 
 </body>
 </html>
