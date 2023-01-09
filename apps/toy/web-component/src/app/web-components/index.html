@@ -9,6 +9,7 @@
   <script src='tooltip.js' defer></script>
   <script src='time.js' defer></script>
   <script src='superA.js' defer></script>
+  <script src='modal.js' defer></script>
   <style>
     /* some global styles */
     :root {
@@ -49,8 +50,27 @@
   <h2>formatted time</h2>
   <time-formatted id="elem" hour="numeric" minute="numeric" second="numeric"></time-formatted>
 
+  <h2>modal</h2>
+  <ze-modal>
+    <h1 slot='title'>Foo bar</h1>
+    <div slot='content'>modal content</div>
+  </ze-modal>
+  <button type='button' id='modal-button'>open modal</button>
+
   <h2>extend built-in tag</h2>
   <a is="super-a" href='https://google.com'>A Super Link</a>
 
+
+  <script>
+    const modal = document.querySelector('ze-modal');
+    const btn = document.getElementById('modal-button');
+    btn.addEventListener('click', () => {
+      modal.open();
+    })
+    // listen to custom event
+    modal.addEventListener('close', () => {
+      console.log('the modal has closed!')
+    })
+  </script>
 </body>
 </html>
