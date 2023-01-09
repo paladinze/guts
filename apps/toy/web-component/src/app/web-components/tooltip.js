@@ -5,9 +5,7 @@ class Tooltip extends HTMLElement {
     this._tooltipContainer = null;
     this.attachShadow({ mode: 'open' });
 
-    const tipTmpl = document.querySelector('#tooltip-tmpl');
-    console.log(tipTmpl);
-    window.tmp = tipTmpl;
+    // const tipTmpl = document.querySelector('#tooltip-tmpl');
     // load shadowDom from external template
     // this.shadowRoot.append(tipTmpl.content.cloneNode(true));
 
@@ -43,6 +41,23 @@ class Tooltip extends HTMLElement {
 
     this.addEventListener('mouseenter', this._addTooltip.bind(this));
     this.addEventListener('mouseleave', this._removeTooltip.bind(this));
+  }
+
+  disconnectedCallback() {
+    console.log('disconnect')
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    console.log({name, oldVal, newVal});
+
+    if (oldVal === newVal) return;
+    if (name === 'text') {
+      this._tipText = newVal;
+    }
+  }
+
+  static get observedAttributes() {
+    return ['text'];
   }
 
   _addTooltip() {
