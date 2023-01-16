@@ -17,9 +17,9 @@ const modelListData = [
     url: 'https://blog.shaderly.com'
   },
   {
-    label: 'Huoshui App',
+    label: 'Linkedin',
     Component: PhoneModel,
-    url: 'http://huoshui.org/'
+    url: 'https://www.linkedin.com/in/paladinze/'
   },
   {
     label: 'GitHub',
