@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 // import './rxjs-demo/cold-and-hot'
 import './rxjs-demo/operators'
 
-@Component({w
+@Component({
   selector: 'guts-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
