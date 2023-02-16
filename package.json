@@ -72,7 +72,8 @@
     "vite": "^4.0.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2",
-    "vitest": "^0.25.8"
+    "vitest": "^0.25.8",
+    "@ngrx/eslint-plugin": "^15.3.0"
   },
   "dependencies": {
     "@angular/animations": "~15.0.0",
@@ -84,6 +85,7 @@
     "@angular/platform-browser-dynamic": "~15.0.0",
     "@angular/router": "~15.0.0",
     "@emotion/react": "^11.10.5",
+    "@ngrx/store": "^15.3.0",
     "@opentelemetry/api": "^1.2.0",
     "@opentelemetry/context-zone": "^1.7.0",
     "@opentelemetry/core": "^1.7.0",
