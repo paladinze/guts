@@ -44,12 +44,4 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  createUser(user: User) {
-    console.log('Create account', user);
-  }
-
-  loginUser(user: User) {
-    console.log('Login', user);
-  }
-
 }
