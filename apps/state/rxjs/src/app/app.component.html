@@ -1,15 +1,31 @@
 
 <div>
   <header>
-    <h1>Angular states</h1>
+    <h1>ANGULAR STATES</h1>
   </header>
+
+  <h2>Routing</h2>
   <router-outlet></router-outlet>
+
+  <h2>RxJS Operators</h2>
 
   <label for='username'>
     GitHub username:
     <input id='username' #nameInput/>
   </label>
 
+  <h2>NgRx Store</h2>
   <app-my-counter></app-my-counter>
 
+  <h2>Content projection</h2>
+  <div>
+    <auth-form
+      (submitted)="createUser($event)">
+      <h4>Create account</h4>
+    </auth-form>
+    <auth-form
+      (submitted)="loginUser($event)">
+      <h4>Login</h4>
+    </auth-form>
+  </div>
 </div>

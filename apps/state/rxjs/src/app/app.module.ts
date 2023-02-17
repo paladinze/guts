@@ -7,6 +7,8 @@ import { DemoModule } from './demo/demo.module';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx-store/counter.reducer';
 import { MyCounterComponent } from './ngrx-store/my-counter.component';
+import { AuthFormComponent } from './demo/content-projection/auth-form.component';
+import { AuthFormModule } from './demo/content-projection/auth-form.module';
 
 const routes: Routes = [
   {
@@ -28,12 +30,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MyCounterComponent
+    MyCounterComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    StoreModule.forRoot({ count: counterReducer })
+    StoreModule.forRoot({ count: counterReducer }),
+    AuthFormModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
