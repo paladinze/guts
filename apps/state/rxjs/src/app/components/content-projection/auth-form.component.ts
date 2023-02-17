@@ -16,14 +16,16 @@ import { AuthRememberComponent } from './auth-remember.component';
   template: `
     <div>
       <ng-content select='h4'></ng-content>
-      <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
+      <form (ngSubmit)='onSubmit(form.value)' #form='ngForm'>
         <label>
           Email address
-          <input type="email" name="email" ngModel>
+          <input type='email' name='email' ngModel
+                 autocomplete='true'
+          >
         </label>
         <label>
           Password
-          <input type="password" name="password" ngModel>
+          <input type='password' name='password' autocomplete='true' ngModel>
         </label>
         <ng-content select='auth-remember'></ng-content>
         <div *ngIf='showRememberMessage'>You will be forever remembered!</div>

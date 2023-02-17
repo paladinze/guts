@@ -3,12 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
-import { DemoModule } from './demo/demo.module';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx-store/counter.reducer';
 import { MyCounterComponent } from './ngrx-store/my-counter.component';
-import { AuthFormComponent } from './demo/content-projection/auth-form.component';
-import { AuthFormModule } from './demo/content-projection/auth-form.module';
+import { CompModule } from './components/comp.module';
 
 const routes: Routes = [
   {
@@ -36,7 +34,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot({ count: counterReducer }),
-    AuthFormModule,
+    CompModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

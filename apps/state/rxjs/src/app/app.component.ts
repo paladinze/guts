@@ -9,7 +9,6 @@ import './rxjs-demo/transform-operators'
 import { asyncScheduler, fromEvent, map, mergeAll, mergeMap, Observable, observeOn, of, subscribeOn, tap } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import './basic-store';
-import { User } from './demo/content-projection/auth-form.interface';
 
 @Component({
   selector: 'guts-root',

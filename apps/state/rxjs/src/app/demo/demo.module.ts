@@ -33,7 +33,7 @@ const routes: Routes = [
   declarations: [
     Demo1Component,
     Demo2Component,
-    DemoListComponent
+    DemoListComponent,
   ],
   imports: [
     CommonModule,
