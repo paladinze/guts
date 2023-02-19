@@ -6,6 +6,10 @@ import { AuthRememberComponent } from './content-projection/auth-remember.compon
 import { FormPage } from './content-projection/form-page';
 import { AuthFormComponent } from './content-projection/auth-form.component';
 import { DumbComponent } from './dynamic-component/dumb-component';
+import { TemplateComp } from './template/template-comp';
+import { EmulatedComponent } from './view-encapsulation/emulated.component';
+import { ShadowComponent } from './view-encapsulation/shadow.component';
+import { GlobalComp } from './view-encapsulation/global.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +17,11 @@ import { DumbComponent } from './dynamic-component/dumb-component';
     AuthFormComponent,
     FormPage,
     AuthRememberComponent,
-    DumbComponent
+    DumbComponent,
+    TemplateComp,
+    EmulatedComponent,
+    ShadowComponent,
+    GlobalComp
   ],
   imports: [
     CommonModule,
@@ -21,7 +29,11 @@ import { DumbComponent } from './dynamic-component/dumb-component';
   ],
   exports: [
     DynamicComp,
-    FormPage
+    FormPage,
+    TemplateComp,
+    EmulatedComponent,
+    ShadowComponent,
+    GlobalComp
   ]
 })
 export class CompModule {
