@@ -13,6 +13,9 @@ import { GlobalComp } from './view-encapsulation/global.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { DefaultChangeComponent } from './change-detection/two/default.component';
 import { OnpushComponent } from './change-detection/one/onpush.component';
+import { CreditCardDirective } from './directive/credit-card.directive';
+import { DirectiveComponent } from './directive/directive.component';
+import { TooltipDirective } from './directive/tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { OnpushComponent } from './change-detection/one/onpush.component';
     DefaultChangeComponent,
     OnpushComponent,
     ChangeDetectionComponent,
+    CreditCardDirective,
+    DirectiveComponent,
+    TooltipDirective
   ],
   imports: [
     CommonModule,
@@ -40,7 +46,8 @@ import { OnpushComponent } from './change-detection/one/onpush.component';
     EmulatedComponent,
     ShadowComponent,
     GlobalComp,
-    ChangeDetectionComponent
+    ChangeDetectionComponent,
+    DirectiveComponent
   ]
 })
 export class CompModule {
