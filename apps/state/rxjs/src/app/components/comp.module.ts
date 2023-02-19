@@ -10,6 +10,9 @@ import { TemplateComp } from './template/template-comp';
 import { EmulatedComponent } from './view-encapsulation/emulated.component';
 import { ShadowComponent } from './view-encapsulation/shadow.component';
 import { GlobalComp } from './view-encapsulation/global.component';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { DefaultChangeComponent } from './change-detection/two/default.component';
+import { OnpushComponent } from './change-detection/one/onpush.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { GlobalComp } from './view-encapsulation/global.component';
     TemplateComp,
     EmulatedComponent,
     ShadowComponent,
-    GlobalComp
+    GlobalComp,
+    DefaultChangeComponent,
+    OnpushComponent,
+    ChangeDetectionComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +39,8 @@ import { GlobalComp } from './view-encapsulation/global.component';
     TemplateComp,
     EmulatedComponent,
     ShadowComponent,
-    GlobalComp
+    GlobalComp,
+    ChangeDetectionComponent
   ]
 })
 export class CompModule {
