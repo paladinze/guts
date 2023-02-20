@@ -44,6 +44,7 @@ import { Component, ViewChild, OnInit, ViewContainerRef, TemplateRef, EmbeddedVi
 @Component({
   selector: 'tmpl-comp',
   template: `
+    <h4>viewContainerRef + ngTemplate</h4>
     <div #bindPoint>
     <ng-template #tmpl>
       <ul>
@@ -52,6 +53,9 @@ import { Component, ViewChild, OnInit, ViewContainerRef, TemplateRef, EmbeddedVi
       </ul>
     </ng-template>
     </div>
+
+    <h4>ngTemplateOutlet + ngTemplate</h4>
+    <ng-container [ngTemplateOutlet]='tmpl'></ng-container>
   `
 })
 export class TemplateComp implements OnInit {
