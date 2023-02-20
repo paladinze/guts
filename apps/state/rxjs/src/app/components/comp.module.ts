@@ -16,6 +16,7 @@ import { OnpushComponent } from './change-detection/one/onpush.component';
 import { CreditCardDirective } from './directive/credit-card.directive';
 import { DirectiveComponent } from './directive/directive.component';
 import { TooltipDirective } from './directive/tooltip.directive';
+import { MyForDirective } from './directive/my-for.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TooltipDirective } from './directive/tooltip.directive';
     ChangeDetectionComponent,
     CreditCardDirective,
     DirectiveComponent,
-    TooltipDirective
+    TooltipDirective,
+    MyForDirective
   ],
   imports: [
     CommonModule,
