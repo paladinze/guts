@@ -44,25 +44,34 @@ import { Component, ViewChild, OnInit, ViewContainerRef, TemplateRef, EmbeddedVi
 @Component({
   selector: 'tmpl-comp',
   template: `
-    <h4>viewContainerRef + ngTemplate</h4>
-    <div #bindPoint>
-    <ng-template #tmpl>
-      <ul>
-        <li>List Item 1</li>
-        <li>List Item 2</li>
-      </ul>
+    <ng-template #tmpl let-name let-index='index'>
+      <li>name: {{name}} | index: {{index}}</li>
     </ng-template>
-    </div>
 
-    <h4>ngTemplateOutlet + ngTemplate</h4>
-    <ng-container [ngTemplateOutlet]='tmpl'></ng-container>
+    <h4>imperative: viewContainerRef + ngTemplate</h4>
+    <ul #bindPoint>
+    </ul>
+
+    <h4>declarative: ngTemplateOutlet + ngTemplate</h4>
+    <ng-container
+      [ngTemplateOutlet]='tmpl'
+      [ngTemplateOutletContext]='ctx'
+    ></ng-container>
   `
 })
 export class TemplateComp implements OnInit {
+  ctx = {
+    $implicit: 'item 1',
+    index: 0
+  }
+
   @ViewChild('bindPoint', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
   @ViewChild('tmpl', {read: TemplateRef, static: true}) tmpl: TemplateRef<any>;
 
   ngOnInit() {
-    this.viewContainerRef.createEmbeddedView(this.tmpl);
+    this.viewContainerRef.createEmbeddedView(this.tmpl, {
+      $implicit: 'item1',
+      index: 0,
+    });
   }
 }
