@@ -32,7 +32,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      enableTracing: true,
+    }),
     StoreModule.forRoot({ count: counterReducer }),
     CompModule,
   ],
