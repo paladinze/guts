@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DynamicComp } from './dynamic-component/dynamic-comp';
@@ -18,9 +18,28 @@ import { DirectiveComponent } from './directive/directive.component';
 import { TooltipDirective } from './directive/tooltip.directive';
 import { MyForDirective } from './directive/my-for.directive';
 import { ProvidersDemo } from './providers/providers-demo';
-import { token1, token2 } from './providers/injection-tokens';
+import { CUSTOM_MODULE_CONFIG, token1, token2 } from './providers/injection-tokens';
 import { FooService } from './providers/foo.service';
 import { BarService } from './providers/bar.service';
+
+
+
+const otherProviders = [
+  { provide: 'configA', useValue: 'configA value' },
+  { provide: token1, useValue: 'configA token 1' },
+  { provide: token2, useValue: 'configA token 2' },
+  { provide: FooService, useClass: FooService },
+  {
+    provide: BarService,
+    useFactory: (fooService: FooService) => {
+      return new BarService(fooService, 'BarService: this is bar!');
+    },
+    deps: [FooService]
+  },
+]
+export interface CustomModuleConfig {
+  name: string;
+}
 
 @NgModule({
   declarations: [
@@ -46,19 +65,6 @@ import { BarService } from './providers/bar.service';
     CommonModule,
     FormsModule
   ],
-  providers: [
-    { provide: 'configA', useValue: 'configA value' },
-    { provide: token1, useValue: 'configA token 1' },
-    { provide: token2, useValue: 'configA token 2' },
-    { provide: FooService, useClass: FooService },
-    {
-      provide: BarService,
-      useFactory: (fooService: FooService) => {
-        return new BarService(fooService, 'BarService: this is bar!');
-      },
-      deps: [FooService]
-    },
-  ],
   exports: [
     DynamicComp,
     FormPage,
@@ -72,4 +78,14 @@ import { BarService } from './providers/bar.service';
   ]
 })
 export class CompModule {
+
+  static forRoot(config: CustomModuleConfig): ModuleWithProviders<any> {
+    return {
+      ngModule: CompModule,
+      providers: [
+        ...otherProviders,
+        { provide: CUSTOM_MODULE_CONFIG, useValue: config }
+      ]
+    }
+  }
 }
