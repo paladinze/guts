@@ -32,7 +32,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, { enableTracing: true, }),
+    RouterModule.forRoot(routes, { enableTracing: false, }),
+    // RouterModule.forRoot(routes, { enableTracing: true, }),
     StoreModule.forRoot({ count: counterReducer }),
     CompModule.forRoot({ name: 'forRoot config: demo module'}),
   ],

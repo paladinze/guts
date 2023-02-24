@@ -5,7 +5,10 @@
   </header>
 
   <h2>Routing</h2>
-  <router-outlet></router-outlet>
+  <router-outlet
+    (activate)='handleActivate($event)'
+    (deactivate)='handleDeactivate($event)'
+  ></router-outlet>
 
   <h2>RxJS Operators</h2>
 

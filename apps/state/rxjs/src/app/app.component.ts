@@ -6,9 +6,22 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 // import './rxjs-demo/countdown-timer'
 // import './rxjs-demo/filtering';
 import './rxjs-demo/transform-operators'
-import { asyncScheduler, fromEvent, map, mergeAll, mergeMap, Observable, observeOn, of, subscribeOn, tap } from 'rxjs';
+import {
+  asyncScheduler,
+  filter,
+  fromEvent,
+  map,
+  mergeAll,
+  mergeMap,
+  Observable,
+  observeOn,
+  of,
+  subscribeOn,
+  tap
+} from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import './basic-store';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'guts-root',
@@ -20,7 +33,20 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild('nameInput') nameInput: ElementRef<HTMLInputElement>;
 
-  constructor() {
+  constructor(private router: Router) {
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      console.log(event)
+    })
+  }
+
+  handleDeactivate(event: any) {
+    console.log('deactivate', event)
+  }
+
+  handleActivate(event: any) {
+    console.log('activate', event)
   }
 
   ngAfterViewInit(): void {
