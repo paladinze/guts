@@ -21,6 +21,7 @@ import { ProvidersDemo } from './providers/providers-demo';
 import { CUSTOM_MODULE_CONFIG, token1, token2 } from './providers/injection-tokens';
 import { FooService } from './providers/foo.service';
 import { BarService } from './providers/bar.service';
+import { LightswitchComp } from './testing-demo/lightswitch-comp';
 
 
 
@@ -59,7 +60,8 @@ export interface CustomModuleConfig {
     DirectiveComponent,
     TooltipDirective,
     MyForDirective,
-    ProvidersDemo
+    ProvidersDemo,
+    LightswitchComp
   ],
   imports: [
     CommonModule,
