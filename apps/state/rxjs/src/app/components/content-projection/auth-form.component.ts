@@ -16,6 +16,8 @@ import { AuthRememberComponent } from './auth-remember.component';
   template: `
     <div>
       <ng-content select='h4'></ng-content>
+      <ng-content select='.foo.bar'></ng-content>
+      <ng-content select='.foo.bar'></ng-content>
       <form (ngSubmit)='onSubmit(form.value)' #form='ngForm'>
         <label>
           Email address

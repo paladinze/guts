@@ -1,0 +1,37 @@
+<div>
+    <auth-form>
+      <h4>form 0: project dynamic content</h4>
+      <div class="foo bar">
+        selecting static classes: 'foo bar'
+      </div>
+      <div class="foo bar {{ myDynamicClass }}">
+        selecting dynamic class
+      </div>
+      <div class="foo bar">
+        <div class="{{ myDynamicClass }}">
+          selecting static class that contains dynamic class
+        </div>
+      </div>
+    </auth-form>
+    <auth-form
+      (submitted)='createUser($event)'>
+      <h4>form 1: create account</h4>
+      <auth-remember
+        (checked)='rememberUser($event)'>
+      </auth-remember>
+      <auth-remember
+        (checked)='rememberUser($event)'>
+      </auth-remember>
+      <button type='submit'>
+        sign up
+      </button>
+    </auth-form>
+    <auth-form
+      (submitted)='loginUser($event)'>
+      <h4>form 2: Login</h4>
+      <button type='submit'>
+        login
+      </button>
+    </auth-form>
+
+  </div>
