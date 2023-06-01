@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DynamicComp } from './dynamic-component/dynamic-comp';
 import { AuthRememberComponent } from './content-projection/auth-remember.component';
@@ -22,6 +22,8 @@ import { CUSTOM_MODULE_CONFIG, token1, token2 } from './providers/injection-toke
 import { FooService } from './providers/foo.service';
 import { BarService } from './providers/bar.service';
 import { LightswitchComp } from './testing-demo/lightswitch-comp';
+import { TemplateFormComponent } from './template-form/template-form.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 
 
@@ -61,11 +63,14 @@ export interface CustomModuleConfig {
     TooltipDirective,
     MyForDirective,
     ProvidersDemo,
-    LightswitchComp
+    LightswitchComp,
+    TemplateFormComponent,
+    ReactiveFormComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     DynamicComp,
@@ -76,7 +81,9 @@ export interface CustomModuleConfig {
     GlobalComp,
     ChangeDetectionComponent,
     DirectiveComponent,
-    ProvidersDemo
+    ProvidersDemo,
+    TemplateFormComponent,
+    ReactiveFormComponent
   ]
 })
 export class CompModule {
