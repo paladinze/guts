@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="user">
+<form novalidate [formGroup]="userForm">
     <label>
       <span>Full name</span>
       <input
@@ -22,5 +22,11 @@
           formControlName="confirm">
       </label>
     </div>
+    <div >
+      <div *ngFor="let skillControl of skillControls; index as i">
+        <skill-item [formControl]="skillControl"></skill-item>
+      </div>
+    </div>
     <button type="submit">Sign up</button>
   </form>
+  {{ userForm.value | json}}

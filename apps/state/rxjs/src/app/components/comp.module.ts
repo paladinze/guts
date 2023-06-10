@@ -24,6 +24,7 @@ import { BarService } from './providers/bar.service';
 import { LightswitchComp } from './testing-demo/lightswitch-comp';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { SkillItemComponent } from './reactive-form/skill-item/skill-item.component';
 
 
 
@@ -65,7 +66,8 @@ export interface CustomModuleConfig {
     ProvidersDemo,
     LightswitchComp,
     TemplateFormComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    SkillItemComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ export interface CustomModuleConfig {
     DirectiveComponent,
     ProvidersDemo,
     TemplateFormComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    SkillItemComponent
   ]
 })
 export class CompModule {
