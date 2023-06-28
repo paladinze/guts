@@ -17,6 +17,7 @@
     "cg-shader-noise": "apps/cg/shader-noise",
     "cg-static-cube": "apps/cg/static-cube",
     "cg-zefolio": "apps/cg/zefolio",
+    "cloud-express": "apps/cloud/express",
     "cloud-otel-client": "apps/cloud/otel-client",
     "css-emotion": "apps/css/emotion",
     "css-sass-demo": "apps/css/sass-demo",
