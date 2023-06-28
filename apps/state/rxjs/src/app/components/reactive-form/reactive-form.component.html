@@ -1,0 +1,32 @@
+<form novalidate [formGroup]="userForm">
+    <label>
+      <span>Full name</span>
+      <input
+        type="text"
+        placeholder="Your full name"
+        formControlName="name">
+    </label>
+    <div formGroupName="account">
+      <label>
+        <span>Email address</span>
+        <input
+          type="email"
+          placeholder="Your email address"
+          formControlName="email">
+      </label>
+      <label>
+        <span>Confirm address</span>
+        <input
+          type="email"
+          placeholder="Confirm your email address"
+          formControlName="confirm">
+      </label>
+    </div>
+    <div >
+      <div *ngFor="let skillControl of skillControls; index as i">
+        <skill-item [formControl]="skillControl"></skill-item>
+      </div>
+    </div>
+    <button type="submit">Sign up</button>
+  </form>
+  {{ userForm.value | json}}
