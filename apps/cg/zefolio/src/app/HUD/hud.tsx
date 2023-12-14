@@ -24,7 +24,12 @@ export default function HUD() {
 
   return createPortal(
     <>
-      <OrthographicCamera ref={virtualCam} makeDefault={true} position={[0, 0, 100]} />
+      {/* @ts-expect-error */}
+      <OrthographicCamera
+        ref={virtualCam}
+        makeDefault={true}
+        position={[0, 0, 100]}
+      />
 
       <ButtonModelList />
 
