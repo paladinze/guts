@@ -1,4 +1,3 @@
-
 # Guts
 
 A Nx-based monorepo that contains some important stuff (most likely just for learning purpose).
@@ -17,7 +16,7 @@ apps
 └── two # canvas based drawing
     └── canvas-basic: demo of basic 2D drawing API
     └── canvas-events: drawing API + mouse events
-    └── canvas-paints: drawing API + pixel-based painting      
+    └── canvas-paints: drawing API + pixel-based painting
 └── cg # computer graphics demo (mostly based on WebGL & Three.js)
     └── static-cube
     └── particles
@@ -39,7 +38,7 @@ apps
 libs
 └── toy # toy implementation of interesting concepts
     └── mini-webpack
-    
+
 
 ```
 
@@ -64,7 +63,6 @@ npm i -g nx
   - available task names are defined in the `project.json` of each project
   - example: `nx run cg-zefolio:build`
 
-
 ## Scaffolding
 
 ### creating apps
@@ -72,7 +70,7 @@ npm i -g nx
 **Create new React App** [More Options](https://nx.dev/packages/react/generators/application#nrwlreactapplication)
 
 ```bash
-nx g @nrwl/react:app --name=[project_name] --directory=[sub directory in apps directory]
+nx g @nx/react:app --name=[project_name] --directory=[sub directory in apps directory]
 ```
 
 - build：Webpack + Babel
@@ -85,10 +83,9 @@ nx g @nrwl/react:app --name=[project_name] --directory=[sub directory in apps di
 **Create Express App** [More Options](https://nx.dev/packages/express/generators/application)
 
 ```bash
-nx g @nrwl/express:application --name=[project_name] --directory=[sub directory in apps directory]
+nx g @nx/express:application --name=[project_name] --directory=[sub directory in apps directory]
 ```
 
 - build：Webpack + Babel
 - language：TypeScript
 - framework：Express
-

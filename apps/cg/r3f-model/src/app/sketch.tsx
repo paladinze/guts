@@ -26,7 +26,7 @@ export default function Sketch() {
     <Perf position={'top-left'} />
     <OrbitControls makeDefault />
     <Stage
-      contactShadow={false}
+      castShadow={false}
       environment='sunset'
       preset={'portrait'}
       intensity={1}
