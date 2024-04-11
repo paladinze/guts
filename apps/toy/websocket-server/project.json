@@ -5,13 +5,15 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/node:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/toy/websocket-server",
         "main": "apps/toy/websocket-server/src/main.ts",
         "tsConfig": "apps/toy/websocket-server/tsconfig.app.json",
-        "assets": ["apps/toy/websocket-server/src/assets"]
+        "assets": ["apps/toy/websocket-server/src/assets"],
+        "compiler": "tsc",
+        "target": "node"
       },
       "configurations": {
         "production": {
@@ -28,7 +30,7 @@
       }
     },
     "serve": {
-      "executor": "@nx/node:node",
+      "executor": "@nx/js:node",
       "options": {
         "buildTarget": "toy-websocket-server:build"
       },
@@ -39,7 +41,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/toy/websocket-server/**/*.ts"]

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import viteTsConfigPaths from 'vite-tsconfig-paths';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   server: {
@@ -15,9 +15,7 @@ export default defineConfig({
         plugins: ["@emotion/babel-plugin"],
       },
     }),
-    viteTsConfigPaths({
-      root: '../../../',
-    }),
+    nxViteTsPaths(),
   ],
 
   test: {

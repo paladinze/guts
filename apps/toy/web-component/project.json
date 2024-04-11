@@ -39,14 +39,14 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/apps/toy/web-component"],
+      "outputs": ["{workspaceRoot}/coverage/apps/toy/web-component"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/apps/toy/web-component"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/toy/web-component/**/*.{ts,tsx,js,jsx}"]

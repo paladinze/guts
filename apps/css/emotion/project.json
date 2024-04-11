@@ -39,14 +39,14 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/apps/css/emotion"],
+      "outputs": ["{workspaceRoot}/coverage/apps/css/emotion"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/apps/css/emotion"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/css/emotion/**/*.{ts,tsx,js,jsx}"]
